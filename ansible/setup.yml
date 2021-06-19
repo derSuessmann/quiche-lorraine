@@ -1,0 +1,66 @@
+- name: Install basic system packages
+  hosts: all
+
+  vars_files:
+  - vars/setup.yml
+
+  tasks:
+  - name: Install basic system packages
+    package:
+      name:
+        - extra-xdg-menus   # needed for HAM Radio menu entry
+        - stow              # needed for stowing directory trees
+        - python3-apt       #
+      state: latest
+    become: yes
+
+  - name: Install my preferred editor for configartion files
+    package:
+      name:
+        - vim
+      state: latest
+    become: yes
+    when: install_vim is defined and install_vim
+
+  - name: Install X Windows and Raspberry PI OS tools
+    package:
+      name:
+        - xorg              # X Window system meta package
+        - piwiz             # Raspberry PI OS first run wizard
+        - rpi-chromium-mods #
+      state: latest
+    become: yes
+
+  - name: Install minimal GNOME desktop environment
+    package:
+      name:
+        - gnome-session
+        - gnome-shell
+        - nautilus
+        - gedit
+        - gnome-terminal
+        - seahorse
+        - gnome-tweaks
+      state: latest
+    become: yes
+    when: install_gnome_minimal is defined and install_gnome_minimal
+    
+  - name: Install full GNOME desktop environment
+    package:
+      name:
+        - gnome
+        - gnome-shell
+      state: latest
+    become: yes
+    when: install_gnome_full is defined and install_gnome_full
+
+  - name: Change permission settings for GNOME
+    copy:
+      content: |
+        [Configuration]
+        AdminIdentities=unix-group:sudo;unix-group:admin
+      dest: /etc/polkit-1/localauthority.conf.d/51-admin.conf
+    become: yes
+    when: ((install_gnome_minimal is defined and install_gnome_minimal)
+     or (install_gnome_full is defined and install_gnome_full))
+    

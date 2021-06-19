@@ -1,0 +1,43 @@
+- name: Template
+  hosts: all
+
+  vars_files:
+    - ../../vars/main.yml
+    - vars.yml
+
+  tasks:
+    - include_tasks: ../../tasks/check_installed.yml
+
+    - block:
+
+      - include_tasks: ../../tasks/download_and_unarchive.yml
+
+      - include_tasks: ../../tasks/install_required_system_packages.yml
+
+      - name: Create Makefile for {{ name_version }}
+        make:
+          chdir: '{{ pkg_build_dir  }}'
+          make: qmake
+          params:
+            PREFIX: '{{ stow_path }}'
+
+      - include_tasks: ../../tasks/make_install.yml
+
+      - name: Create .desktop file for {{ name_version }}
+        template:
+          src: desktop.j2
+          dest: '{{ stow_path }}/share/applications/qsstv.desktop'
+        become: yes
+
+      - name: Copy icon for {{ name_version }}
+        copy:
+          src: '{{ pkg_build_dir }}/qsstv/icons/qsstv.png'
+          dest: '{{ stow_path }}/share/applications/'
+          remote_src: yes
+        become: yes
+
+      - include_tasks: ../../tasks/stow.yml
+
+      - include_tasks: ../../tasks/mark_as_installed.yml 
+
+      when: not installed.stat.exists

@@ -1,0 +1,28 @@
+---
+
+# Menu category for ham radio
+category_ham: 'HamRadio'
+
+# Directory for quiche-lorraine
+project_dir: '{{ ansible_user_dir }}/.quiche-lorraine'
+
+# Directory to download the archives to
+download_dir: '{{ project_dir }}/Downloads'
+
+# Directory to unarchive source archives to
+build_dir: '{{ project_dir }}/build'
+
+# Directory to keep state in
+state_dir: '{{ project_dir}}/state'
+
+# Directory with local subtree
+install_dir: /usr/local
+
+# Directory where GNU stow expects the installed tree
+stow_dir: /usr/local/stow
+
+# Number of jobs used in make run
+make_jobs_number: 4
+
+# Go is not available for armv7l, but armv6l
+golang_architecture: "{{ 'armv6l' if ansible_architecture == 'armv7l' else ansible_architecture }}"

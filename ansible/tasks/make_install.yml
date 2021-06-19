@@ -1,0 +1,16 @@
+---
+
+- name: Build {{ name_version }}
+  make:
+    chdir: '{{ pkg_build_dir }}'
+    params:
+      PREFIX: '{{ stow_path }}'
+    jobs: '{{ make_jobs_number }}'        
+
+- name: Install {{ name_version }}
+  make:
+    chdir: '{{ pkg_build_dir }}'
+    target: install
+    params:
+      PREFIX: '{{ stow_path }}'
+  become: yes

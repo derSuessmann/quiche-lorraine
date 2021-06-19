@@ -1,0 +1,19 @@
+- name: Upgrade system
+  hosts: all
+
+  tasks:
+
+  - name: Update all packages to the latest version
+    become: yes
+    apt:
+      upgrade: dist
+
+  - name: Autoremove unneeded packages
+    become: yes
+    apt:
+      autoremove: yes
+
+  - name: Remove unneeded packages from the cache
+    become: yes
+    apt:
+      autoclean: yes

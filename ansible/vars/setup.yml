@@ -1,0 +1,8 @@
+---
+
+# Install editor VIM (many people may not want it)
+install_vim: yes
+
+# Choose GNOME desktop environment
+#install_gnome_minimal: no
+#install_gnome_full: no

@@ -1,0 +1,6 @@
+---
+
+- name: Check if {{ name_version }} is already installed
+  stat:
+    path: '{{ state_dir }}/{{ name_version }}.installed'
+  register: installed

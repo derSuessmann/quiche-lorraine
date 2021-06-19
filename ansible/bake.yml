@@ -1,0 +1,28 @@
+- name: Install all packages
+  hosts: ham
+
+  vars_files:
+  - vars/main.yml
+
+  tasks:
+
+  - name: Create download directory
+    file:
+      state: directory
+      mode: 'u=rwx,go=rx'
+      dest: '{{ download_dir }}'
+  
+  - name: Create build directory
+    file:
+      state: directory
+      mode: 'u=rwx,go=rx'
+      dest: '{{ build_dir }}'
+
+  - name: Create state directory
+    file:
+      state: directory
+      mode: 'u=rwx,go=rx'
+      dest: '{{ state_dir }}'
+
+- import_playbook: upgrade_system.yml
+- import_playbook: setup.yml
