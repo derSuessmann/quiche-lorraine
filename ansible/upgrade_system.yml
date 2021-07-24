@@ -6,6 +6,7 @@
   - name: Update all packages to the latest version
     become: yes
     apt:
+      update_cache: yes
       upgrade: dist
 
   - name: Autoremove unneeded packages

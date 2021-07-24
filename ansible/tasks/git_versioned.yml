@@ -1,0 +1,14 @@
+---
+
+- name: Install git
+  package:
+    name:
+      - git
+    state: latest
+  become: yes
+
+- name: Git clone '{{ name_version }}'
+  git:
+    repo: '{{ mirror }}'
+    dest: '{{ pkg_build_dir }}'
+    version: '{{ version }}'

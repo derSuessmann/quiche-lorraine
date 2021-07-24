@@ -1,0 +1,60 @@
+---
+# tasks file for qsstv
+
+- include_tasks: tasks/check_installed.yml
+
+- block:
+
+  - include_tasks: tasks/download_and_unarchive.yml
+
+  # hack to include version in build dir, because current archive 
+  # does not contain version
+  - name: stat foo
+    stat: 
+      path: '{{ build_dir }}/qsstv'
+    register: qsstv_build_stat
+
+  - name: Rename build directory
+    command: mv '{{ build_dir }}/qsstv' {{ pkg_build_dir }}
+    when: qsstv_build_stat.stat.exists
+
+  - include_tasks: tasks/install_required_system_packages.yml
+
+  - name: Create Makefile for {{ name_version }}
+    make:
+      chdir: '{{ pkg_build_dir  }}'
+      make: qmake
+      params:
+        PREFIX: '{{ stow_path }}'
+
+  - include_tasks: tasks/make_install.yml
+
+  - name: Create additional directories for {{ name_version }}
+    ansible.builtin.file:
+      path: '{{ stow_path }}/{{ directory }}'
+      state: directory
+      mode: 'u=rwx,go=rx'
+    loop: ['share/applications/', 'share/icons']
+    loop_control:
+      loop_var: directory
+    become: yes
+
+  - name: Create .desktop file for {{ name_version }}
+    template:
+      src: desktop.j2
+      dest: '{{ stow_path }}/share/applications/qsstv.desktop'
+    become: yes
+
+  - name: Copy icon for {{ name_version }}
+    copy:
+      src: '{{ pkg_build_dir }}/icons/qsstv.png'
+      dest: '{{ stow_path }}/share/pixmaps/'
+      remote_src: yes
+    become: yes
+
+  - include_tasks: tasks/unstow.yml
+  - include_tasks: tasks/stow.yml
+
+  - include_tasks: tasks/mark_as_installed.yml 
+
+  when: not installed.stat.exists

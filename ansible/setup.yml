@@ -14,7 +14,7 @@
       state: latest
     become: yes
 
-  - name: Install my preferred editor for configartion files
+  - name: Install my preferred editor for configuration files
     package:
       name:
         - vim

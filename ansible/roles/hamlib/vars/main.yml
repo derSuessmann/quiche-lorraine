@@ -1,0 +1,34 @@
+---
+# vars file for hamlib
+
+pkg_name: hamlib
+version: '4.2'
+name_version: '{{ pkg_name }}-{{ version }}'
+mirror: https://github.com/Hamlib/Hamlib.git
+#archive: '{{ pkg_name }}_{{ version }}.tar.gz'
+pkg_build_dir: '{{ build_dir }}/{{ pkg_name }}-{{ version }}'
+stow_path: '{{ stow_dir }}/{{ name_version }}'
+required_system_packages:
+  - build-essential
+  - libtool
+  - automake
+  - libfltk1.3-dev
+  - libsamplerate0-dev
+  - portaudio19-dev
+  - libsndfile1-dev
+  - libxft-dev
+  - libxinerama-dev
+  - libxcursor-dev
+  - libpulse-dev
+  - pavucontrol
+  - swig
+  - libusb-1.0-0-dev
+  - libreadline-dev
+  - libxml2-dev
+  - libgd-dev
+  - python-dev
+  - tcl-dev
+  - lua5.3
+  - liblua5.3-dev
+configure_options: '--with-xml-support --with-readline --with-python-binding --with-tcl-binding --with-lua-binding'
+enabled: yes

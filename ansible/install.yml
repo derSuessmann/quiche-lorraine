@@ -1,0 +1,17 @@
+---
+
+- hosts: all
+
+  vars_files:
+    - vars/main.yml
+
+  tasks:
+
+    - include_role:
+        name: qsstv
+
+    - include_role: 
+        name: kappanhang
+
+    - include_role: 
+        name: wfview

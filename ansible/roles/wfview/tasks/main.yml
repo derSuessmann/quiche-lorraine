@@ -1,0 +1,40 @@
+---
+# tasks file for wfview
+
+- include_tasks: tasks/check_installed.yml
+
+- block:
+
+  - include_tasks: tasks/git_versioned.yml
+
+  - include_tasks: tasks/install_required_system_packages.yml
+
+  - name: Create build directory for {{ name_version }}
+    file:
+      state: directory
+      mode: 'u=rwx,go=rx'
+      dest: '{{ build_dir }}/{{ name_version }}-build'
+
+  - name: Create Makefile for {{ name_version }}
+    command:
+      cmd: qmake '{{ pkg_build_dir }}/wfview.pro' 'PREFIX={{ stow_path }}'
+      chdir: '{{ build_dir }}/{{ name_version }}-build'
+      creates: Makefile
+
+  - name: Build {{ name_version }}
+    make:
+      chdir: '{{ build_dir }}/{{ name_version }}-build'
+      jobs: '{{ make_jobs_number }}'
+
+  - name: Build {{ name_version }}
+    make:
+      chdir: '{{ build_dir }}/{{ name_version }}-build'
+      target: install
+    become: yes
+
+  - include_tasks: tasks/unstow.yml
+  - include_tasks: tasks/stow.yml
+
+  - include_tasks: tasks/mark_as_installed.yml 
+
+  when: not installed.stat.exists

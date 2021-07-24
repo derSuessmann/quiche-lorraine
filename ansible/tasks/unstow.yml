@@ -1,0 +1,16 @@
+---
+
+- block:
+  - name: Find old packages of {{ pkg_name }}
+    find:
+      file_type: directory
+      path: '{{ stow_dir }}'
+      pattern: '{{ pkg_name }}-*'
+    register: dirname
+
+  - name: Unstow old versions of {{ pkg_name }}
+    command:
+      cmd: 'stow -D {{ item.path | basename }}'
+      chdir: '{{ stow_dir }}'
+    with_items: '{{ dirname.files }}'
+    become: yes

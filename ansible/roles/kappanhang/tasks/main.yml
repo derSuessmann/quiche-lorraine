@@ -1,0 +1,39 @@
+---
+# tasks file for kappanhang
+
+- include_tasks: tasks/check_installed.yml
+
+- block:
+
+  - include_tasks: tasks/install_required_system_packages.yml
+
+  - include_tasks: tasks/go_get.yml
+
+  - name: Create install directory
+    become: yes
+    file:
+      state: directory
+      mode: 'u=rwx,go=rx'
+      dest: '{{ stow_path }}/{{ directory }}'
+    loop: ['bin', 'share/applications']
+    loop_control:
+      loop_var: directory
+
+  - name: Copy binary
+    copy:
+      src: '{{ build_dir }}/go/bin/kappanhang'
+      dest: '{{ stow_path }}/bin/'
+      mode: 'preserve'
+      remote_src: yes
+    become: yes
+
+  - name: Create .desktop file
+    template:
+      src: desktop.j2
+      dest: '{{ stow_path }}/share/applications/kappanhang.desktop'
+    become: yes
+
+  - include_tasks: tasks/unstow.yml
+  - include_tasks: tasks/stow.yml
+
+  - include_tasks: tasks/mark_as_installed.yml
