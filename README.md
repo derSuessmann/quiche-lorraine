@@ -34,9 +34,9 @@ The `ansible` folder contains my playbooks. The main playbook is `bake.yml`.
 
 The folder `vars` contains files with variables for all playbooks. It contains the file `main.yml` with the variable for the baking of our pie.
 
-The folder `tasks` contains files with reusable tasks for different classes of installation procedures. I have removed the usage of roles at the moment. They were a huge overhead cluttering up my structure.
+The folder `tasks` contains files with reusable tasks for different classes of installation procedures.
 
-The different tools are to be found in the `packages` folder. Each folder in `packages` contains a different tool. The `install.yml` playbook installs (who would have guessed) the software. The `vars.yml` file contains the variables for the installation of this package.
+The different tools are to be found in the `roles` folder. Each folder in `roles` contains a different tool.
 
 All the playbooks use [GNU stow](https://www.gnu.org/software/stow/) for managing the installed software in `/usr/local`. This keeps all the different tools and their different versions nice and clean in their own folders below `/usr/local/stow`.
 
