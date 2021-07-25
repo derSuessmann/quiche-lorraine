@@ -2,6 +2,6 @@
 
 - name: Stow {{ name_version }}
   command:
-    cmd: 'stow -S {{ name_version }}'
+    cmd: 'stow -R {{ name_version }}'
     chdir: '{{ stow_dir }}'
   become: yes
