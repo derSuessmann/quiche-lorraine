@@ -1,0 +1,28 @@
+- block:
+
+  - stat:
+      path: '{{ stow_path }}/bin/{{ target }}'
+    register: result
+
+  - name: 'Build {{ target }}'
+    community.general.make:
+      chdir: '{{ pkg_build_dir }}'
+      target: '{{ target }}'
+      jobs: 4
+    when: not result.stat.exists
+  
+  - name: 'Copy {{ target }}'
+    copy:
+      src: '{{ pkg_build_dir }}/{{ target }}'
+      dest: '{{ stow_path }}/bin/'
+      mode: preserve
+      remote_src: yes
+    when: not result.stat.exists
+    become: yes
+
+  - name: Create .desktop file
+    template:
+      src: desktop.j2
+      dest: '{{ stow_path }}/share/applications/{{ target }}.desktop'
+    when: not result.stat.exists
+    become: yes

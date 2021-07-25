@@ -1,0 +1,74 @@
+---
+# tasks file for hamclock
+
+- include_tasks: tasks/download_and_unarchive.yml
+
+- include_tasks: tasks/install_required_system_packages.yml
+
+- name: Copy print_version.c
+  copy:
+    content: |
+      #include <stdio.h>
+      #include "version.h"
+
+      int main() {
+        puts(HC_VERSION);
+      }
+    dest: '{{ pkg_build_dir }}/print_version.c'
+
+- name: Build print_version
+  shell:
+    cmd: gcc -o print_version print_version.c
+    chdir: '{{ pkg_build_dir }}'
+    creates: print_version
+
+- name: Get version of hamclock
+  command: 
+    cmd: ./print_version
+    chdir: '{{ pkg_build_dir }}'
+  register: print_version
+
+- name: Store version
+  set_fact:
+    version: '{{ print_version.stdout }}'
+
+- name: Store name_version
+  set_fact:
+    name_version: '{{ pkg_name }}-{{ version }}'
+  
+- name: Store stow_path
+  set_fact:
+    stow_path: '{{ stow_dir }}/{{ name_version }}'
+
+- include_tasks: tasks/check_installed.yml
+
+- block:
+
+  - name: Create install directory
+    become: yes
+    file:
+      state: directory
+      mode: 'u=rwx,go=rx'
+      dest: '{{ stow_path }}/{{ directory }}'
+    loop: ['bin', 'share/applications', 'share/pixmaps']
+    loop_control:
+      loop_var: directory
+
+  - name: Copy icon
+    copy:
+      src: '{{ pkg_build_dir }}//hamclock.png'
+      dest: '{{ stow_path }}/share/pixmaps/'
+      remote_src: yes
+    become: yes
+
+  - name: Build and install
+    include_tasks: build_copy.yml
+    loop: '{{ executables }}'
+    loop_control:
+      loop_var: target
+
+  - include_tasks: tasks/stow.yml
+  
+  - include_tasks: tasks/mark_as_installed.yml
+
+  when: not installed.stat.exists
