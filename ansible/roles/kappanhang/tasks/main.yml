@@ -36,3 +36,5 @@
   - include_tasks: tasks/stow.yml
 
   - include_tasks: tasks/mark_as_installed.yml
+
+  when: not installed.stat.exists
