@@ -52,7 +52,6 @@
       remote_src: yes
     become: yes
 
-  - include_tasks: tasks/unstow.yml
   - include_tasks: tasks/stow.yml
 
   - include_tasks: tasks/mark_as_installed.yml 
