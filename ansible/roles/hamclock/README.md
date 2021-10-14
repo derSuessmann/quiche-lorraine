@@ -1,6 +1,6 @@
 # HamClock
 
-This role installs HamClock. It provides nice clock with a world map for radio amateurs.
+This role installs HamClock. It provides a nice clock with a world map for radio amateurs.
 
 <!--more-->
 
@@ -13,7 +13,7 @@ HamClock started its life as an ESP8266 Arduino project. Later the author ported
 
 I really do not understand, why so many hams provide their software as tarballs or even zip files. Elwood's HamClock is really a great piece of software. It annoys me just a little bit, that I had to use some trickery to determine the current version for my stow path.
 
-The build process is described in the "Desktop" tabon the [web site][1]. Again, the web site has a strange UI, but is very informative.
+The build process is described in the "Desktop" tab on the [web site][1]. Again, the web site has a strange UI, but is very informative.
 
 The manual describes a rather simple build process: `make hamclock && sudo make install`. There are other targets `hamclock-big` alias `hamclock-1600x960`, `hamclock-2400x1440` and `hamclock-3200x1920`. `make install does not honor the prefix. Each build of a target deletes the old build files. This Ansible role implements therefore its own installation routines. It also build a tiny tool to extract the current version form the sources.
 
