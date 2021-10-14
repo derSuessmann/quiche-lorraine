@@ -12,3 +12,11 @@
     repo: '{{ mirror }}'
     dest: '{{ pkg_build_dir }}'
     version: '{{ version }}'
+  when: git_commit is not defined
+
+- name: Git clone '{{ name_version }}'
+  git:
+    repo: '{{ mirror }}'
+    dest: '{{ pkg_build_dir }}'
+    version: '{{ git_commit }}'
+  when: git_commit is defined
