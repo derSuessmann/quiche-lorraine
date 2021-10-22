@@ -1,0 +1,40 @@
+---
+
+- name: Install cmake
+  package:
+    name:
+      - cmake
+    state: latest
+  become: yes
+
+
+- name: Create build directory for {{ name_version }}
+  file:
+    state: directory
+    mode: 'u=rwx,go=rx'
+    dest: '{{ build_dir }}/{{ name_version }}-build'
+
+- name: Create Makefile for {{ name_version }}
+  command:
+    cmd: cmake '{{ cmake_defines }}' -D CMAKE_INSTALL_PREFIX='{{ stow_path }}' {{ pkg_build_dir }}
+    chdir: '{{ build_dir }}/{{ name_version }}-build'
+    creates: Makefile
+  when: cmake_defines is defined
+
+- name: Create Makefile for {{ name_version }}
+  command:
+    cmd: cmake -D CMAKE_INSTALL_PREFIX='{{ stow_path }}' {{ pkg_build_dir }}
+    chdir: '{{ build_dir }}/{{ name_version }}-build'
+    creates: Makefile
+  when: cmake_defines is not defined
+
+- name: Build {{ name_version }}
+  command:
+    cmd: cmake --build .
+    chdir: '{{ build_dir }}/{{ name_version }}-build'
+
+- name: Install {{ name_version }}
+  command:
+    cmd: cmake --build . --target install
+    chdir: '{{ build_dir }}/{{ name_version }}-build'
+  become: yes
