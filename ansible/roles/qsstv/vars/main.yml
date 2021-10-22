@@ -2,7 +2,7 @@
 # vars file for qsstv
 
 pkg_name: qsstv
-version: 9.5.6
+version: 9.5.8
 name_version: '{{ pkg_name }}-{{ version }}'
 mirror: http://users.telenet.be/on4qz/qsstv/downloads/
 archive: 'qsstv_{{ version }}.tar.gz'
