@@ -21,8 +21,6 @@
 
   - include_tasks: tasks/configure_make_install.yml
 
-  - include_tasks: tasks/unstow.yml
-
   - include_tasks: tasks/stow.yml
 
   - name: Update systems shared libraries
@@ -30,6 +28,6 @@
       cmd: ldconfig
     become: yes
 
-  - include_tasks: ../../../tasks/mark_as_installed.yml 
+  - include_tasks: tasks/mark_as_installed.yml 
 
   when: not installed.stat.exists
