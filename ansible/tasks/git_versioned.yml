@@ -19,4 +19,4 @@
     repo: '{{ mirror }}'
     dest: '{{ pkg_build_dir }}'
     version: '{{ git_commit }}'
-  when: git_commit is defined
+  when: git_commit is defined and git_commit != ''
