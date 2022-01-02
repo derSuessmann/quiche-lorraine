@@ -8,7 +8,7 @@ This project describes the setup of a Raspberry Pi for amateur radio operations.
 
 ## Why on earth bother?
 
-When I started my project, I knew [DL1GKK article](https://dl1gkk.com/setup-raspberry-pi-for-ham-radio/) and followed some of the steps on my Raspberry Pi. This was quite a while ago. Then I reused the Raspberry Pi. After quite some time, I came back to using the Pi for reception of SSTV images. QSSTV was a bit outdated, so I got back on DL1GKK's site and installed QSSTV again. After some interations I got tired of this process.
+When I started my project, I knew [DL1GKK's article](https://dl1gkk.com/setup-raspberry-pi-for-ham-radio/) and followed some of the steps on my Raspberry Pi. This was quite a while ago. Then I reused the Raspberry Pi. After quite some time, I came back to using the Pi for reception of SSTV images. QSSTV was a bit outdated, so I got back on DL1GKK's site and installed QSSTV again. After some iterations I got tired of this process.
 
 I never considered running a prepared image like the one from W3DJS mainly for security reasons.
 
@@ -58,7 +58,7 @@ You may use my other project [bake-a-py](https://github.com/derSuessmann/bake-a-
 
 ### Prepare your control node
 
-The computer running the Ansible playbooks is called the control node. Normally it is your PC or your laptop. You will need Ansible on the control node. I have no idea how to use Ansible on a Microsoft Windows machine. You must only install the `ansible` package with your distributions package manager on Linux distributions. All the main Linux distributions have it.
+The computer running the Ansible playbooks is called the control node. Normally it is your PC or your laptop. You will need Ansible on the control node. I have no idea how to use Ansible on a Microsoft Windows machine. That is your problem, if you are still using Windows. It is easy on Linux. You just must install the `ansible` package with your distributions package manager on Linux distributions. All the main Linux distributions have it.
 
 1. Install Ansible (e.g. `sudo apt install ansible`).
 2. Create a ssh key pair (e.g. `ssh-keygen`). You may certainly use an already existing ssh id.
