@@ -1,0 +1,18 @@
+---
+# tasks file for flxmlrpc
+
+- include_tasks: ../../tasks/check_installed.yml
+
+- block:
+
+  - include_tasks: ../../tasks/download_and_unarchive.yml
+
+  - include_tasks: ../../tasks/install_required_system_packages.yml
+
+  - include_tasks: ../../tasks/configure_make_install.yml
+
+  - include_tasks: ../../tasks/stow.yml
+
+  - include_tasks: ../../tasks/mark_as_installed.yml 
+
+  when: not installed.stat.exists

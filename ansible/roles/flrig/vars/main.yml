@@ -1,0 +1,14 @@
+---
+# vars file for flrig
+
+pkg_name: flrig
+version: 1.4.4
+name_version: '{{ pkg_name }}-{{ version }}'
+mirror: 'http://www.w1hkj.com/files/{{ pkg_name }}'
+archive: '{{ pkg_name }}-{{ version }}.tar.gz'
+pkg_build_dir: '{{ build_dir }}/{{ pkg_name }}-{{ version }}'
+stow_path: '{{ stow_dir }}/{{ name_version }}'
+required_system_packages:
+  - build-essential
+  - libfltk1.3-dev
+enabled: yes
