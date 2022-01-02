@@ -7,14 +7,14 @@
     state: latest
   become: yes
 
-- name: Git clone '{{ name_version }}'
+- name: Git clone '{{ name_version }} by version'
   git:
     repo: '{{ mirror }}'
     dest: '{{ pkg_build_dir }}'
     version: '{{ version }}'
-  when: git_commit is not defined
+  when: git_commit is not defined or git_commit == ''
 
-- name: Git clone '{{ name_version }}'
+- name: Git clone '{{ name_version }} by commit hash'
   git:
     repo: '{{ mirror }}'
     dest: '{{ pkg_build_dir }}'
