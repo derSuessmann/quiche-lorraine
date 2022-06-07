@@ -8,6 +8,21 @@
   tasks:
 
     - include_role:
+        name: gpredict
+
+    - include_role:
+        name: fldigi
+        
+    - include_role:
+        name: flrig
+
+    - include_role:
+        name: fllog
+
+    - include_role:
+        name: wsjtx
+
+    - include_role:
         name: qsstv
 
     - include_role: 
@@ -16,5 +31,12 @@
     - include_role: 
         name: wfview
 
+    - include_role:
+        name: gqrx
+
+    - include_role:
+        name: cubicsdr
+
+    # hamclock role is broken and must be called last
     - include_role:
         name: hamclock
