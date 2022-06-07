@@ -2,7 +2,7 @@
 # vars file for wsjtx
 
 pkg_name: wsjtx
-version: 2.5.2
+version: 2.5.4
 name_version: '{{ pkg_name }}-{{ version }}'
 mirror: https://physics.princeton.edu/pulsar/k1jt
 archive: '{{ pkg_name }}-{{ version }}.tgz'
