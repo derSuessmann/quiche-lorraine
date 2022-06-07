@@ -1,0 +1,19 @@
+---
+
+- name: Go install '{{ name_version }}'
+  environment:
+    PATH: '{{ install_dir }}/go/bin:{{ ansible_env.PATH }}'
+    GOPATH: '{{ build_dir }}/go'
+  command: 
+    cmd: 'go install {{ mirror}}/{{ pkg_name }}@{{ git_commit }}'
+    creates: '{{ build_dir }}/go/bin/{{ pkg_name }}'
+  when: git_commit is defined
+
+- name: Go install '{{ name_version }}'
+  environment:
+    PATH: '{{ install_dir }}/go/bin:{{ ansible_env.PATH }}'
+    GOPATH: '{{ build_dir }}/go'
+  command: 
+    cmd: 'go install {{ mirror}}/{{ pkg_name }}'
+    creates: '{{ build_dir }}/go/bin/{{ pkg_name }}'
+  when: git_commit is not defined
