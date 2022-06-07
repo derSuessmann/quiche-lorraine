@@ -2,7 +2,7 @@
 # vars file for golang
 
 pkg_name: golang
-version: 1.16.3
+version: 1.18.3
 name_version: '{{ pkg_name }}-{{ version }}'
 mirror: https://golang.org/dl/
 archive: 'go{{ version }}.linux-{{ golang_architecture }}.tar.gz'

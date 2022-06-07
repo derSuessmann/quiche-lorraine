@@ -2,7 +2,7 @@
 # vars file for flrig
 
 pkg_name: flrig
-version: 1.4.4
+version: 1.4.5
 name_version: '{{ pkg_name }}-{{ version }}'
 mirror: 'http://www.w1hkj.com/files/{{ pkg_name }}'
 archive: '{{ pkg_name }}-{{ version }}.tar.gz'

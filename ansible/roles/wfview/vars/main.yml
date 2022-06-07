@@ -2,16 +2,15 @@
 # vars file for wfview
 
 pkg_name: wfview
-version: 'test'
+version: '1.2e'
 name_version: '{{ pkg_name }}-{{ version }}'
-mirror: https://gitlab.com/dersuessmann/wfview.git
-#archive: '{{ name_version }}.tar.gz'
+mirror: https://gitlab.com/eliggett/wfview.git
 pkg_build_dir: '{{ build_dir }}/{{ pkg_name }}-{{ version }}'
 stow_path: '{{ stow_dir }}/{{ name_version }}'
 required_system_packages:
   - build-essential
   - qt5-qmake
-  - qt5-default
+  - qtbase5-dev
   - libqt5core5a
   - qtbase5-dev
   - libqt5serialport5
@@ -22,4 +21,5 @@ required_system_packages:
   - libqcustomplot2.0
   - libqcustomplot-doc
   - libqcustomplot-dev
+  - libopus-dev
 enabled: yes

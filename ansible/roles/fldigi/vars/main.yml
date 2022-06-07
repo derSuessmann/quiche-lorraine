@@ -2,7 +2,7 @@
 # vars file for fldigi
 
 pkg_name: fldigi
-version: 4.1.20
+version: 4.1.22
 name_version: '{{ pkg_name }}-{{ version }}'
 mirror: 'http://www.w1hkj.com/files/{{ pkg_name }}'
 archive: '{{ pkg_name }}-{{ version }}.tar.gz'

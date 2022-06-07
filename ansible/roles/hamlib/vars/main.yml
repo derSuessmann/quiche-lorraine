@@ -2,7 +2,7 @@
 # vars file for hamlib
 
 pkg_name: hamlib
-version: '4.2'
+version: '4.4'
 name_version: '{{ pkg_name }}-{{ version }}'
 mirror: https://github.com/Hamlib/Hamlib.git
 #archive: '{{ pkg_name }}_{{ version }}.tar.gz'
@@ -26,7 +26,7 @@ required_system_packages:
   - libreadline-dev
   - libxml2-dev
   - libgd-dev
-  - python-dev
+  - python3-dev
   - tcl-dev
   - lua5.3
   - liblua5.3-dev
