@@ -30,7 +30,7 @@
 
 - name: Build {{ name_version }}
   command:
-    cmd: cmake --build .
+    cmd: cmake - {{ ansible_processor_vcpus }} --build .
     chdir: '{{ build_dir }}/{{ name_version }}-build'
 
 - name: Install {{ name_version }}
