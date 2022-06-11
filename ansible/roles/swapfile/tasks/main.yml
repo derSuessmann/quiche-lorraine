@@ -1,0 +1,18 @@
+---
+# tasks file for swapfile
+
+- include_tasks: create.yml
+  when: swapfile_state == 'present'
+
+- name: Manage fstab entry
+  mount:
+    name: none
+    src: "{{ swapfile_path }}"
+    fstype: swap
+    opts: sw
+    state: "{{ swapfile_state }}"
+
+- include_tasks: remove.yml
+  when: swapfile_state == 'absent'
+
+

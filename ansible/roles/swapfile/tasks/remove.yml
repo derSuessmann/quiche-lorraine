@@ -1,0 +1,9 @@
+---
+
+- name: Disable swap
+  command: swapoff -a
+
+- name: Remove swap file
+  file:
+    path: "{{ swapfile_path }}"
+    state: absent

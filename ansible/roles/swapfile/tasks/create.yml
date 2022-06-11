@@ -1,0 +1,25 @@
+---
+
+- name: Ensure file exists
+  command: >
+    fallocate -l '{{ swapfile_size }}' '{{ swapfile_path }}'
+    creates='{{ swapfile_path }}'
+  register: swapfile_created
+
+- name: Set permissions
+  file:
+    path: "{{ swapfile_path }}"
+    owner: root
+    group: root
+    mode: 0600
+
+- name: Make swap
+  command: mkswap {{ swapfile_path }}
+  when: swapfile_created is changed
+  register: mkswap_result
+
+- name: Run swapon
+  command: swapon {{ swapfile_path }}
+  when:
+    - mkswap_result is changed
+
