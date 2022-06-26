@@ -8,13 +8,16 @@
     apt:
       update_cache: yes
       upgrade: dist
+    tags: prepare
 
   - name: Autoremove unneeded packages
     become: yes
     apt:
       autoremove: yes
+    tags: prepare
 
   - name: Remove unneeded packages from the cache
     become: yes
     apt:
       autoclean: yes
+    tags: prepare
