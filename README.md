@@ -54,7 +54,7 @@ The following steps should only be a reminder. If you have no idea how to comple
 6. Enable ssh access.
 7. Reboot the Pi
 
-You may use my other project [bake-a-py](https://github.com/derSuessmann/bake-a-py) for provisioning the Raspberry Pi.
+You may use my other project [bake-a-py](https://github.com/derSuessmann/bake-a-py) for installing the base system and provisioning the Raspberry Pi.
 
 ### Prepare your control node
 
@@ -67,11 +67,11 @@ The computer running the Ansible playbooks is called the control node. Normally 
 
 ### Bake your Pi
 
-5. Change `ansible/hosts` if your Raspberry Pi's hostname is not `lorraine`.
-6. Chdir to the `ansible` folder.
-7. Comment out the packages you do not want on your Raspberry Pi in `bake.yml`.
-8. Run `ansible-playbook bake.yml`
-9. Stare for a long time on the screen, go for a walk or have a couple of cups of coffee.
+1. Change `ansible/hosts` if your Raspberry Pi's hostname is not `lorraine`.
+2. Chdir to the `ansible` folder.
+3. Comment out the packages you do not want on your Raspberry Pi in `bake.yml`.
+4. Run `ansible-playbook bake.yml`
+5. Stare for a long time on the screen, go for a walk or have a couple of cups of coffee.
 
 ## Different desktop environments on the Raspberry Pi
 
@@ -81,3 +81,8 @@ You are free to choose "Desktop and recommended software", "Desktop" or "Lite" f
 
 I have bought a high resolution 10" touch display. The default LXDE based desktop environment in "Desktop" does not work well with touch. GNOME on the other hand is touch oriented. You may install GNOME on your Raspberry Pi OS Lite by setting the variable `install_gnome_minimal` or `install_gnome_full` to `yes` (`install_gnome_full` installs a complete desktop environment with LibreOffice and more).
 
+# Status of the project
+
+The project is far from being stable! The structure is quite brittle. The main reason is the dependancies between the different software projects. In the end it is some sort of mini distribution on top of an existing distribution.
+
+The `bake.yml` playbook currently runs without an error on my Pi. The software it installs seems to work.
