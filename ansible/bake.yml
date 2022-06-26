@@ -11,18 +11,21 @@
       state: directory
       mode: 'u=rwx,go=rx'
       dest: '{{ download_dir }}'
+    tags: prepare
   
   - name: Create build directory
     file:
       state: directory
       mode: 'u=rwx,go=rx'
       dest: '{{ build_dir }}'
+    tags: prepare
 
   - name: Create state directory
     file:
       state: directory
       mode: 'u=rwx,go=rx'
       dest: '{{ state_dir }}'
+    tags: prepare
 
 - import_playbook: upgrade_system.yml
 - import_playbook: setup.yml
