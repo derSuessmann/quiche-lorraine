@@ -13,6 +13,7 @@
         - python3-apt       #
       state: latest
     become: yes
+    tags: prepare
 
   - name: Install my preferred editor for configuration files
     package:
@@ -21,6 +22,7 @@
       state: latest
     become: yes
     when: install_vim is defined and install_vim
+    tags: prepare
 
   - name: Install X Windows and Raspberry PI OS tools
     package:
@@ -30,6 +32,7 @@
         - rpi-chromium-mods #
       state: latest
     become: yes
+    tags: prepare
 
   - name: Install minimal GNOME desktop environment
     package:
@@ -44,6 +47,7 @@
       state: latest
     become: yes
     when: install_gnome_minimal is defined and install_gnome_minimal
+    tags: prepare
     
   - name: Install full GNOME desktop environment
     package:
@@ -53,6 +57,7 @@
       state: latest
     become: yes
     when: install_gnome_full is defined and install_gnome_full
+    tags: prepare
 
   - name: Change permission settings for GNOME
     copy:
@@ -63,4 +68,5 @@
     become: yes
     when: ((install_gnome_minimal is defined and install_gnome_minimal)
      or (install_gnome_full is defined and install_gnome_full))
+    tags: prepare
     
