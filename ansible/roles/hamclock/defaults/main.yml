@@ -1,0 +1,4 @@
+---
+# defaults file for hamclock
+
+hamclock_executables: ['hamclock', 'hamclock-big', 'hamclock-2400x1440', 'hamclock-3200x1920']

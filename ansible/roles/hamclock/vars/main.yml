@@ -8,7 +8,6 @@ mirror: http://www.clearskyinstitute.com/ham/HamClock/
 archive: ESPHamClock.tgz
 pkg_build_dir: '{{ build_dir }}/ESPHamClock'
 stow_path: '{{ stow_dir }}/{{ name_version }}'
-executables: ['hamclock', 'hamclock-big']
 required_system_packages:
   - g++
   - libx11-dev

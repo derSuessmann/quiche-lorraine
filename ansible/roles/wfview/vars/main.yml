@@ -22,4 +22,6 @@ required_system_packages:
   - libqcustomplot-doc
   - libqcustomplot-dev
   - libopus-dev
+  - libeigen3-dev
+  - librtaudio-dev
 enabled: yes

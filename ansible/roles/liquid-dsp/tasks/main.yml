@@ -1,0 +1,28 @@
+---
+# tasks file for liquid-dsp
+
+- include_tasks: tasks/check_installed.yml
+
+- block:
+
+  - include_tasks: tasks/git_versioned.yml
+
+  - include_tasks: tasks/install_required_system_packages.yml
+
+  - name: Create autoconf 
+    command:
+      cmd: ./bootstrap.sh
+      chdir: '{{ pkg_build_dir  }}'
+
+  - include_tasks: tasks/configure_make_install.yml
+
+  - include_tasks: tasks/stow.yml
+
+  - name: Update systems shared libraries
+    command:
+      cmd: ldconfig
+    become: yes
+
+  - include_tasks: tasks/mark_as_installed.yml 
+
+  when: not installed.stat.exists

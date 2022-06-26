@@ -1,0 +1,18 @@
+---
+# tasks file for wfview
+
+- include_tasks: tasks/check_installed.yml
+
+- block:
+
+  - include_tasks: tasks/git_versioned.yml
+
+  - include_tasks: tasks/install_required_system_packages.yml
+
+  - include_tasks: tasks/cmake_make_install.yml
+
+  - include_tasks: tasks/stow.yml
+
+  - include_tasks: tasks/mark_as_installed.yml 
+
+  when: not installed.stat.exists

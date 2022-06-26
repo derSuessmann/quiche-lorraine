@@ -1,0 +1,60 @@
+---
+# tasks file for uhd
+
+- include_tasks: tasks/check_installed.yml
+
+- block:
+
+  - include_tasks: tasks/git_versioned.yml
+
+  - include_tasks: tasks/install_required_system_packages.yml
+
+  - name: Create build directory for {{ name_version }}
+    file:
+      state: directory
+      mode: 'u=rwx,go=rx'
+      dest: '{{ build_dir }}/{{ name_version }}-build'
+
+  - name: Create Makefile for {{ name_version }}
+    command:
+      cmd: cmake -DCMAKE_SHARED_LINKER_FLAGS='-latomic' '-DNEON_SIMD_ENABLE=OFF' -D CMAKE_INSTALL_PREFIX='{{ stow_path }}' {{ pkg_build_dir }}/host
+      chdir: '{{ build_dir }}/{{ name_version }}-build'
+      creates: Makefile
+    when: cmake_defines is defined
+
+  - name: Create Makefile for {{ name_version }}
+    command:
+      cmd: cmake -D CMAKE_INSTALL_PREFIX='{{ stow_path }}' {{ pkg_build_dir }}/host
+      chdir: '{{ build_dir }}/{{ name_version }}-build'
+      creates: Makefile
+    when: cmake_defines is not defined
+
+  - name: Build {{ name_version }}
+    make:
+      jobs: 4
+      chdir: '{{ build_dir }}/{{ name_version }}-build'
+
+  - name: Test {{ name_version }}
+    make:
+      target: test
+      chdir: '{{ build_dir }}/{{ name_version }}-build'
+
+  - name: Install {{ name_version }}
+    make:
+      target: install
+      chdir: '{{ build_dir }}/{{ name_version }}-build'
+    become: yes
+    notify: 'Update systems shared libraries'
+
+  - name: Copy udev.rules
+    copy:
+      src: '{{ build_dir }}/{{ name_version }}/host/utils/uhd-usrp.rules'
+      dest: '{{ stow_dir }}/etc/udev/rules.d/'
+      remote_src: yes
+    notify: 'Reload udev rules'
+
+  - include_tasks: tasks/stow.yml
+
+  - include_tasks: tasks/mark_as_installed.yml 
+
+  when: not installed.stat.exists

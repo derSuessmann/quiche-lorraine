@@ -11,7 +11,7 @@ stow_path: '{{ stow_dir }}/{{ name_version }}'
 required_system_packages:
   - g++
   - libfftw3-dev
-  - qt5-default
+  - qtbase5-dev
   - libasound2-dev
   - libpulse-dev
   - libopenjp2-7

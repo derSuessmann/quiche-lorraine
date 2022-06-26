@@ -30,15 +30,15 @@
 
 - name: Store version
   set_fact:
-    version: '{{ print_version.stdout }}'
+    hamclock_version: '{{ print_version.stdout }}'
 
 - name: Store name_version
   set_fact:
-    name_version: '{{ pkg_name }}-{{ version }}'
+    hamclock_name_version: '{{ pkg_name }}-{{ version }}'
   
 - name: Store stow_path
   set_fact:
-    stow_path: '{{ stow_dir }}/{{ name_version }}'
+    hamclock_stow_path: '{{ stow_dir }}/{{ name_version }}'
 
 - include_tasks: tasks/check_installed.yml
 
@@ -49,21 +49,21 @@
     file:
       state: directory
       mode: 'u=rwx,go=rx'
-      dest: '{{ stow_path }}/{{ directory }}'
+      dest: '{{ hamclock_stow_path }}/{{ directory }}'
     loop: ['bin', 'share/applications', 'share/pixmaps']
     loop_control:
       loop_var: directory
 
   - name: Copy icon
     copy:
-      src: '{{ pkg_build_dir }}//hamclock.png'
-      dest: '{{ stow_path }}/share/pixmaps/'
+      src: '{{ pkg_build_dir }}/hamclock.png'
+      dest: '{{ hamclock_stow_path }}/share/pixmaps/'
       remote_src: yes
     become: yes
 
   - name: Build and install
     include_tasks: build_copy.yml
-    loop: '{{ executables }}'
+    loop: '{{ hamclock_executables }}'
     loop_control:
       loop_var: target
 

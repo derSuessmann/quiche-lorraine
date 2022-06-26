@@ -5,38 +5,63 @@
   vars_files:
     - vars/main.yml
 
-  tasks:
+  roles:
+    - role: swapfile
+      vars:
+        swapfile_state: present
+      become: yes
+      tags: prepare
 
-    - include_role:
-        name: gpredict
+    - role: gnuradio
+      tags: gnuradio
 
-    - include_role:
-        name: fldigi
+    - role: gqrx
+      tags: gqrx
+
+    - role: gpredict
+      tags: gpredict
+
+    - role: fldigi
+      tags: 
+        - fldigi
+        - fltools
         
-    - include_role:
-        name: flrig
+    - role: flrig
+      tags: 
+        - flrig
+        - fltools
+        
+    - role: fllog
+      tags: 
+        - fllog
+        - fltools
+        
+    - role: wsjtx
+      tags: wsjtx
 
-    - include_role:
-        name: fllog
+    - role: qsstv
+      tags: qsstv
+        
+    - role: kappanhang
+      tags: kappanhang
+        
+    - role: wfview
+      tags: wfview
 
-    - include_role:
-        name: wsjtx
+    - role: soapysdr
+      tags: soapysdr
 
-    - include_role:
-        name: qsstv
+    - role: cubicsdr
+      tags: cubicsdr
 
-    - include_role: 
-        name: kappanhang
 
-    - include_role: 
-        name: wfview
 
-    - include_role:
-        name: gqrx
-
-    - include_role:
-        name: cubicsdr
-
-    # hamclock role is broken and must be called last
-    - include_role:
-        name: hamclock
+    # hamclock role is broken and must be called last  
+    - role: hamclock
+      hamclock_executables: 
+        - 'hamclock'
+        #- 'hamclock-big'
+        - 'hamclock-2400x1440'
+        - 'hamclock-3200x1920'
+      tags: hamclock
+        

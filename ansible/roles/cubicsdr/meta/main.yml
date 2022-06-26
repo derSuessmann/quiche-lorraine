@@ -1,0 +1,8 @@
+---
+# meta file for CubicSDR
+
+dependencies:
+  - role: liquid-dsp
+  - role: wxwidgets
+  - role: hamlib
+  - role: soapysdr

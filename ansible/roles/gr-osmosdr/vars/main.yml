@@ -1,0 +1,24 @@
+---
+# vars file for gr-osmosdr
+
+pkg_name: gr-osmosdr
+version: '20220610'
+git_commit: '821fdb3822b3ad258bdd4be79e5cd3d5964289fb'
+name_version: '{{ pkg_name }}-{{ version }}'
+mirror: https://gitea.osmocom.org/sdr/gr-osmosdr.git
+#archive: '{{ pkg_name }}_{{ version }}.tar.gz'
+pkg_build_dir: '{{ build_dir }}/{{ pkg_name }}-{{ version }}'
+stow_path: '{{ stow_dir }}/{{ name_version }}'
+required_system_packages:
+  - git
+  - cmake
+  - g++
+  - libpython3-dev
+  - python3-numpy
+  - swig
+  - librtlsdr-dev
+  - libairspy-dev
+  - libhackrf-dev
+#  - libfreesrp-dev
+enabled: yes
+

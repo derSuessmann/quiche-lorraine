@@ -1,0 +1,22 @@
+---
+
+- name: Reload udev rules
+  block:
+  - command:
+      cmd: udevadm control --reload-rules
+    become: yes
+
+  - command:
+      cmd: udevadm trigger
+    become: yes
+
+- name: Download the UHD FPGA Images for this installation
+  command:
+    cmd: uhd_images_downloader
+  become: yes
+
+- name: Update systems shared libraries
+  command:
+    cmd: ldconfig
+  become: yes
+  notify: 'Download the UHD FPGA Images for this installation'

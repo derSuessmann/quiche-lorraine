@@ -1,0 +1,18 @@
+---
+# vars file for wxwidgets
+
+pkg_name: wxwidgets
+version: 'v3.1.5'
+name_version: '{{ pkg_name }}-{{ version }}'
+mirror: https://github.com/wxWidgets/wxWidgets
+#archive: '{{ name_version }}.tar.gz'
+pkg_build_dir: '{{ build_dir }}/{{ pkg_name }}-{{ version }}'
+stow_path: '{{ stow_dir }}/{{ name_version }}'
+configure_options: '--with-gtk=3'
+required_system_packages:
+  - build-essential
+  - automake
+  - libgtk-3-dev
+  - freeglut3
+  - freeglut3-dev
+enabled: yes

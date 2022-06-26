@@ -9,23 +9,23 @@
 
   - include_tasks: ../../tasks/install_required_system_packages.yml
 
-  - name: Create build directory for {{ name_version }}
-    file:
-      state: directory
-      mode: 'u=rwx,go=rx'
-      dest: '{{ build_dir }}/{{ name_version }}-build'
+  # - name: Create build directory for {{ name_version }}
+  #   file:
+  #     state: directory
+  #     mode: 'u=rwx,go=rx'
+  #     dest: '{{ build_dir }}/{{ name_version }}-build'
 
-  - name: Create stow directory for {{ name_version }}
-    # The cmake is a bit picky, if it cannot create the installation
-    # directory. Creating the directory before avoids running the
-    # build process with superuser privileges.
-    file:
-      state: directory
-      mode: 'u=rwx,go=rx'
-      dest: '{{ stow_dir }}/{{ name_version }}'
-    become: yes
+  # - name: Create stow directory for {{ name_version }}
+  #   # The cmake is a bit picky, if it cannot create the installation
+  #   # directory. Creating the directory before avoids running the
+  #   # build process with superuser privileges.
+  #   file:
+  #     state: directory
+  #     mode: 'u=rwx,go=rx'
+  #     dest: '{{ stow_dir }}/{{ name_version }}'
+  #   become: yes
 
-  - include_tasks: ../../tasks/cmake_build_install.yml
+  - include_tasks: ../../tasks/cmake_make_install.yml
 
   - include_tasks: ../../tasks/stow.yml
 

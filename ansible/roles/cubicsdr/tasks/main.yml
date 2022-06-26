@@ -1,0 +1,4 @@
+---
+# tasks file for cubicsdr
+
+- include_tasks: from_source.yml
