@@ -27,3 +27,7 @@
   vars:
     stow_path: '{{ stow_dir }}/soapysdr-0.8.1'
 
+- include_role: 
+    name: soapysdr/soapyplutosdr
+  vars:
+    stow_path: '{{ stow_dir }}/soapysdr-0.8.1'

@@ -19,6 +19,8 @@ required_system_packages:
   - librtlsdr-dev
   - libairspy-dev
   - libhackrf-dev
+  - libiio-dev
+  - libad9361-dev
 #  - libfreesrp-dev
 enabled: yes
 
