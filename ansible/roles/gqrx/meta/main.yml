@@ -1,4 +1,0 @@
----
-dependencies:
-  - role: gnuradio
-  - role: gr-osmosdr

@@ -1,0 +1,5 @@
+---
+dependencies:
+  - role: gnuradio
+  - role: gr-osmosdr
+#  - role: gr-iio
