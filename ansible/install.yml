@@ -12,52 +12,46 @@
       become: yes
       tags: prepare
 
-    - role: gnuradio
-      tags: gnuradio
-
-    - role: gqrx
+    - role: packages/gqrx
       tags: gqrx
 
-    - role: gpredict
-      tags: gpredict
+    # - role: gpredict
+    #   tags: gpredict
 
-    - role: fldigi
+    - role: packages/fldigi
       tags: 
         - fldigi
         - fltools
         
-    - role: flrig
+    - role: packages/flrig
       tags: 
         - flrig
         - fltools
         
-    - role: fllog
+    - role: packages/fllog
       tags: 
         - fllog
         - fltools
         
-    - role: wsjtx
+    - role: packages/wsjtx
       tags: wsjtx
 
-    - role: qsstv
+    - role: packages/qsstv
       tags: qsstv
         
-    - role: kappanhang
-      tags: kappanhang
-        
-    - role: wfview
+    - role: packages/wfview
       tags: wfview
 
-    - role: soapysdr
+    - role: packages/soapysdr
       tags: soapysdr
 
-    - role: cubicsdr
+    - role: packages/cubicsdr
       tags: cubicsdr
 
 
 
     # hamclock role is broken and must be called last  
-    - role: hamclock
+    - role: packages/hamclock
       hamclock_executables: 
         - 'hamclock'
         #- 'hamclock-big'
@@ -65,3 +59,5 @@
         - 'hamclock-3200x1920'
       tags: hamclock
         
+    - role: packages/kappanhang
+      tags: kappanhang

@@ -1,14 +1,10 @@
 ---
 # vars file for hamclock
 
-pkg_name: hamclock
+this_name: hamclock
 version: dynamic
-name_version: '{{ pkg_name }}-{{ version }}'
-mirror: http://www.clearskyinstitute.com/ham/HamClock/
-archive: ESPHamClock.tgz
+name_version: '{{ this_name }}-{{ this_version }}'
 pkg_build_dir: '{{ build_dir }}/ESPHamClock'
-stow_path: '{{ stow_dir }}/{{ name_version }}'
 required_system_packages:
   - g++
   - libx11-dev
-enabled: yes

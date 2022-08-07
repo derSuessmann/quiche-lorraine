@@ -1,9 +1,21 @@
 ---
 # tasks file for hamclock
 
-- include_tasks: tasks/download_and_unarchive.yml
+- name: Install system packages for {{ name_version }}
+  package:
+    name: '{{ required_system_packages }}'
+    state: latest
+  become: true
+  tags: 'prepare'
 
-- include_tasks: tasks/install_required_system_packages.yml
+- include_role: 
+    name: get_source
+  vars:
+    method: 'download_archive'
+    pkg_name: '{{ name_version }}'
+    source_uri: 'http://www.clearskyinstitute.com/ham/HamClock/ESPHamClock.tgz'
+    destination: '{{ download_dir }}/{{ name_version }}'
+  tags: 'get_source'
 
 - name: Copy print_version.c
   copy:
@@ -14,18 +26,18 @@
       int main() {
         puts(HC_VERSION);
       }
-    dest: '{{ pkg_build_dir }}/print_version.c'
+    dest: '{{ download_dir }}/ESPHamClock/print_version.c'
 
 - name: Build print_version
   shell:
     cmd: gcc -o print_version print_version.c
-    chdir: '{{ pkg_build_dir }}'
+    chdir: '{{ download_dir }}//ESPHamClock'
     creates: print_version
 
 - name: Get version of hamclock
   command: 
     cmd: ./print_version
-    chdir: '{{ pkg_build_dir }}'
+    chdir: '{{ download_dir }}//ESPHamClock'
   register: print_version
 
 - name: Store version
@@ -34,41 +46,37 @@
 
 - name: Store name_version
   set_fact:
-    hamclock_name_version: '{{ pkg_name }}-{{ version }}'
+    hamclock_name_version: '{{ this_name }}-{{ hamclock_version }}'
   
 - name: Store stow_path
   set_fact:
-    hamclock_stow_path: '{{ stow_dir }}/{{ name_version }}'
+    hamclock_stow_path: '{{ stow_dir }}/{{ hamclock_name_version }}'
 
-- include_tasks: tasks/check_installed.yml
+- name: Create install directory
+  become: true
+  file:
+    state: directory
+    mode: 'u=rwx,go=rx'
+    dest: '{{ hamclock_stow_path }}/{{ directory }}'
+  loop: ['bin', 'share/applications', 'share/pixmaps']
+  loop_control:
+    loop_var: directory
 
-- block:
+- name: Copy icon
+  copy:
+    src: '{{ download_dir }}/ESPHamClock/hamclock.png'
+    dest: '{{ hamclock_stow_path }}/share/pixmaps/'
+    remote_src: yes
+  become: true
 
-  - name: Create install directory
-    become: yes
-    file:
-      state: directory
-      mode: 'u=rwx,go=rx'
-      dest: '{{ hamclock_stow_path }}/{{ directory }}'
-    loop: ['bin', 'share/applications', 'share/pixmaps']
-    loop_control:
-      loop_var: directory
+- name: Build and install
+  include_tasks: build_copy.yml
+  loop: '{{ hamclock_executables }}'
+  loop_control:
+    loop_var: target
 
-  - name: Copy icon
-    copy:
-      src: '{{ pkg_build_dir }}/hamclock.png'
-      dest: '{{ hamclock_stow_path }}/share/pixmaps/'
-      remote_src: yes
-    become: yes
-
-  - name: Build and install
-    include_tasks: build_copy.yml
-    loop: '{{ hamclock_executables }}'
-    loop_control:
-      loop_var: target
-
-  - include_tasks: tasks/stow.yml
-  
-  - include_tasks: tasks/mark_as_installed.yml
-
-  when: not installed.stat.exists
+- name: Stow {{ name_version }}
+  command:
+    cmd: 'stow -R {{ hamclock_name_version }}'
+    chdir: '{{ stow_dir }}'
+  become: true

@@ -1,0 +1,9 @@
+---
+# vars file for SoapyRTLSDR
+
+this_name: soapyrtlsdr
+this_version: '0.3.3'
+name_version: '{{ this_name }}-{{ this_version }}'
+required_system_packages:
+  - rtl-sdr
+  - librtlsdr-dev

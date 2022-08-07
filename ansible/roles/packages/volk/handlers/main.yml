@@ -1,6 +1,0 @@
----
-
-- name: Update systems shared libraries
-  command:
-    cmd: ldconfig
-  become: yes

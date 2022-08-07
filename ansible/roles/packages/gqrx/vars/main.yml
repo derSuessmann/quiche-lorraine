@@ -1,17 +1,11 @@
 ---
 # vars file for gqrx
 
-pkg_name: gqrx
-version: 'v2.15.9'
-git_commit: ''
-name_version: '{{ pkg_name }}-{{ version }}'
-mirror: https://github.com/gqrx-sdr/gqrx.git
-#archive: '{{ pkg_name }}_{{ version }}.tar.gz'
-pkg_build_dir: '{{ build_dir }}/{{ pkg_name }}-{{ version }}'
-stow_path: '{{ stow_dir }}/{{ name_version }}'
+this_name: gqrx
+this_version: '2.15.9'
+name_version: '{{ this_name }}-{{ this_version }}'
 required_system_packages:
   - cmake
   - qtbase5-dev
   - libqt5svg5-dev
   - libpulse-dev
-enabled: yes

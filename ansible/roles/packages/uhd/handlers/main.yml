@@ -14,9 +14,3 @@
   command:
     cmd: uhd_images_downloader
   become: yes
-
-- name: Update systems shared libraries
-  command:
-    cmd: ldconfig
-  become: yes
-  notify: 'Download the UHD FPGA Images for this installation'

@@ -1,60 +1,56 @@
 ---
 # tasks file for uhd
 
-- include_tasks: tasks/check_installed.yml
+- name: Install system packages for {{ name_version }}
+  package:
+    name: '{{ required_system_packages }}'
+    state: latest
+  become: true
+  tags: 'prepare'
 
-- block:
+- include_role: 
+    name: get_source
+  vars:
+    method: 'git'
+    pkg_name: '{{ name_version }}'
+    source_uri: 'https://github.com/EttusResearch/uhd.git'
+    destination: '{{ download_dir }}/{{ name_version }}'
+    commit: 'v{{ this_version }}'
+  tags: 'get_source'
 
-  - include_tasks: tasks/git_versioned.yml
+- name: Remove conflicting system packages for {{ name_version }}
+  package:
+    name:
+    - 'uhd*'
+    state: absent
+  become: true
+  tags: 'cleanup'
 
-  - include_tasks: tasks/install_required_system_packages.yml
+- include_role: 
+    name: build_install
+  vars:
+    method: 'cmake'
+    pkg_name: '{{ name_version }}'
+    source_path: '{{ download_dir }}/{{ name_version }}'
+    build_path: '{{ build_dir }}/{{ name_version }}'
+    install_path: '{{ stow_dir }}/{{ name_version }}'
+    cmake_defines: "-DCMAKE_SHARED_LINKER_FLAGS='-latomic' '-DNEON_SIMD_ENABLE=OFF'"
 
-  - name: Create build directory for {{ name_version }}
-    file:
-      state: directory
-      mode: 'u=rwx,go=rx'
-      dest: '{{ build_dir }}/{{ name_version }}-build'
+- name: Stow {{ name_version }}
+  command:
+    cmd: 'stow -R {{ name_version }}'
+    chdir: '{{ stow_dir }}'
+  become: true
 
-  - name: Create Makefile for {{ name_version }}
-    command:
-      cmd: cmake -DCMAKE_SHARED_LINKER_FLAGS='-latomic' '-DNEON_SIMD_ENABLE=OFF' -D CMAKE_INSTALL_PREFIX='{{ stow_path }}' {{ pkg_build_dir }}/host
-      chdir: '{{ build_dir }}/{{ name_version }}-build'
-      creates: Makefile
-    when: cmake_defines is defined
+- name: Copy udev.rules
+  copy:
+    src: '{{ build_dir }}/{{ name_version }}/host/utils/uhd-usrp.rules'
+    dest: '{{ stow_dir }}/etc/udev/rules.d/'
+    remote_src: yes
+  notify: 'Reload udev rules'
 
-  - name: Create Makefile for {{ name_version }}
-    command:
-      cmd: cmake -D CMAKE_INSTALL_PREFIX='{{ stow_path }}' {{ pkg_build_dir }}/host
-      chdir: '{{ build_dir }}/{{ name_version }}-build'
-      creates: Makefile
-    when: cmake_defines is not defined
-
-  - name: Build {{ name_version }}
-    make:
-      jobs: 4
-      chdir: '{{ build_dir }}/{{ name_version }}-build'
-
-  - name: Test {{ name_version }}
-    make:
-      target: test
-      chdir: '{{ build_dir }}/{{ name_version }}-build'
-
-  - name: Install {{ name_version }}
-    make:
-      target: install
-      chdir: '{{ build_dir }}/{{ name_version }}-build'
-    become: yes
-    notify: 'Update systems shared libraries'
-
-  - name: Copy udev.rules
-    copy:
-      src: '{{ build_dir }}/{{ name_version }}/host/utils/uhd-usrp.rules'
-      dest: '{{ stow_dir }}/etc/udev/rules.d/'
-      remote_src: yes
-    notify: 'Reload udev rules'
-
-  - include_tasks: tasks/stow.yml
-
-  - include_tasks: tasks/mark_as_installed.yml 
-
-  when: not installed.stat.exists
+- name: Update systems shared libraries
+  command:
+    cmd: ldconfig
+  notify: 'Download the UHD FPGA Images for this installation'
+  become: true

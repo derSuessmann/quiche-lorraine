@@ -1,14 +1,9 @@
 ---
 # vars file for CubicSDR
 
-pkg_name: cubicsdr
-version: '0.2.7'
-git_commit: ''
-name_version: '{{ pkg_name }}-{{ version }}'
-mirror: https://github.com/cjcliffe/CubicSDR.git
-#archive: '{{ name_version }}.tar.gz'
-pkg_build_dir: '{{ build_dir }}/{{ pkg_name }}-{{ version }}'
-stow_path: '{{ stow_dir }}/{{ name_version }}'
+this_name: cubicsdr
+this_version: '0.2.7'
+name_version: '{{ this_name }}-{{ this_version }}'
 required_system_packages:
   - build-essential
   - cmake
@@ -16,5 +11,3 @@ required_system_packages:
   - libgtk-3-dev
   - freeglut3
   - freeglut3-dev
-cmake_defines: '-DOTHER_LIBS="-latomic" -DUSE_HAMLIB=1'
-enabled: yes

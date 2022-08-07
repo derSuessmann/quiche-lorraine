@@ -1,0 +1,28 @@
+---
+# tasks file for get_source
+
+- name: Git clone '{{ pkg_name }}'
+  git:
+    repo: '{{ source_uri }}'
+    dest: '{{ destination }}'
+    version: '{{ commit }}'
+    #force: yes
+  when: method == 'git'
+
+- block:
+  - name: Download archives {{ pkg_name }}
+    get_url:
+      url: '{{ source_uri }}'
+      dest: '{{ download_dir }}/{{ source_uri | basename }}'
+      force: no
+      use_proxy: yes
+      validate_certs: yes
+      mode: 'u=rw,go=r'
+
+  - name: Unarchive {{ pkg_name }}
+    unarchive:
+      src: '{{ download_dir }}/{{ source_uri | basename }}'
+      remote_src: yes
+      dest: '{{ destination | dirname }}'
+      creates: '{{ destination }}'
+    when: method == 'download_archive'

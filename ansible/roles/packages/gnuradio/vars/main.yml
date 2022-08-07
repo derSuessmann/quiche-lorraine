@@ -1,13 +1,9 @@
 ---
 # vars file for gnuradio
 
-pkg_name: gnuradio
-version: 'v3.10.2.0'
-name_version: '{{ pkg_name }}-{{ version }}'
-mirror: https://github.com/gnuradio/gnuradio.git
-#archive: '{{ pkg_name }}_{{ version }}.tar.gz'
-pkg_build_dir: '{{ build_dir }}/{{ pkg_name }}-{{ version }}'
-stow_path: '{{ stow_dir }}/{{ name_version }}'
+this_name: gnuradio
+this_version: '3.10.3.0'
+name_version: '{{ this_name }}-{{ this_version }}'
 required_system_packages:
   - git
   - cmake
@@ -52,4 +48,3 @@ required_system_packages:
   - libspdlog-dev
   - libportaudio2
   - libjack-dev
-enabled: yes

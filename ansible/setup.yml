@@ -3,11 +3,13 @@
 
   vars_files:
   - vars/setup.yml
-
+  - vars/main.yml
+  
   tasks:
   - name: Install basic system packages
     package:
       name:
+        - git
         - extra-xdg-menus   # needed for HAM Radio menu entry
         - stow              # needed for stowing directory trees
         - python3-apt       #
@@ -68,5 +70,12 @@
     become: yes
     when: ((install_gnome_minimal is defined and install_gnome_minimal)
      or (install_gnome_full is defined and install_gnome_full))
+    tags: prepare
+
+  - name: Create download directory
+    file:
+      state: directory
+      mode: 'u=rwx,go=rx'
+      dest: '{{ download_dir }}'
     tags: prepare
     

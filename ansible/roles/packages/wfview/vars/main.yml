@@ -1,12 +1,9 @@
 ---
 # vars file for wfview
 
-pkg_name: wfview
-version: '1.2e'
-name_version: '{{ pkg_name }}-{{ version }}'
-mirror: https://gitlab.com/eliggett/wfview.git
-pkg_build_dir: '{{ build_dir }}/{{ pkg_name }}-{{ version }}'
-stow_path: '{{ stow_dir }}/{{ name_version }}'
+this_name: wfview
+this_version: '1.2e'
+name_version: '{{ this_name }}-{{ this_version }}'
 required_system_packages:
   - build-essential
   - qt5-qmake
@@ -24,4 +21,3 @@ required_system_packages:
   - libopus-dev
   - libeigen3-dev
   - librtaudio-dev
-enabled: yes

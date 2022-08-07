@@ -1,8 +1,0 @@
----
-# install package from distribution
-
-- name: Install CubicSDR package
-  apt: 
-    name: 
-    - cubicsdr
-  become: yes

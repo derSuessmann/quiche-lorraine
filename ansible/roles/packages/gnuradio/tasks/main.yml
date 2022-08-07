@@ -1,23 +1,47 @@
 ---
 # tasks file for gnuradio
 
-- include_tasks: tasks/check_installed.yml
+- name: Install system packages for {{ name_version }}
+  package:
+    name: '{{ required_system_packages }}'
+    state: latest
+  become: true
+  tags: 'prepare'
 
-- block:
+- include_role: 
+    name: get_source
+  vars:
+    method: 'git'
+    pkg_name: '{{ name_version }}'
+    source_uri: 'https://github.com/gnuradio/gnuradio.git'
+    destination: '{{ download_dir }}/{{ name_version }}'
+    commit: 'v{{ this_version }}'
+  tags: 'get_source'
 
-  - include_tasks: tasks/git_versioned.yml
+- name: Remove conflicting system packages for {{ name_version }}
+  package:
+    name:
+    - gnuradio
+    state: absent
+  become: true
+  tags: 'cleanup'
 
-  - include_tasks: tasks/install_required_system_packages.yml
+- include_role: 
+    name: build_install
+  vars:
+    method: 'cmake'
+    pkg_name: '{{ name_version }}'
+    source_path: '{{ download_dir }}/{{ name_version }}'
+    build_path: '{{ build_dir }}/{{ name_version }}'
+    install_path: '{{ stow_dir }}/{{ name_version }}'
 
-  - include_tasks: tasks/cmake_make_install.yml
+- name: Stow {{ name_version }}
+  command:
+    cmd: 'stow -R {{ name_version }}'
+    chdir: '{{ stow_dir }}'
+  become: true
 
-  - include_tasks: tasks/stow.yml
-
-  - name: Update systems shared libraries
-    command:
-      cmd: ldconfig
-    become: yes
-
-  - include_tasks: tasks/mark_as_installed.yml 
-
-  when: not installed.stat.exists
+- name: Update systems shared libraries
+  command:
+    cmd: ldconfig
+  become: true

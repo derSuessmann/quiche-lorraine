@@ -1,33 +1,50 @@
 ---
 # tasks file for hamlib
 
-- include_tasks: tasks/check_installed.yml
+- name: Install system packages for {{ name_version }}
+  package:
+    name: '{{ required_system_packages }}'
+    state: latest
+  become: true
+  tags: 'prepare'
 
-- block:
+- include_role: 
+    name: get_source
+  vars:
+    method: 'git'
+    pkg_name: '{{ name_version }}'
+    source_uri: 'https://github.com/Hamlib/Hamlib.git'
+    destination: '{{ download_dir }}/{{ name_version }}'
+    commit: '{{ version }}'
+  tags: 'get_source'
 
-  - include_tasks: tasks/git_versioned.yml
+- name: Remove conflicting system packages for {{ name_version }}
+  package:
+    name:
+    - libhamlib-dev
+    state: absent
+  become: true
+  tags: 'cleanup'
 
-  - include_tasks: tasks/install_required_system_packages.yml
+- include_role: 
+    name: build_install
+  vars:
+    method: 'configure'
+    pkg_name: '{{ name_version }}'
+    source_path: '{{ download_dir }}/{{ name_version }}'
+    build_path: '{{ build_dir }}/{{ name_version }}'
+    install_path: '{{ stow_dir }}/{{ name_version }}'
+    configure_options: '--with-xml-support --with-readline --with-python-binding --with-tcl-binding --with-lua-binding'
+    bootstrap_command: './bootstrap'
+    bootstrapped: '{{ download_dir }}/{{ name_version }}/configure'
 
-  # Remove Debian version of hamlib?
-  # is there a conflict?
+- name: Stow {{ name_version }}
+  command:
+    cmd: 'stow -R {{ name_version }}'
+    chdir: '{{ stow_dir }}'
+  become: true
 
-  - name: Create ./configure for {{ name_version }}
-    command:
-      cmd: ./bootstrap
-      chdir: '{{ pkg_build_dir }}'
-    args:
-      creates: '{{ pkg_build_dir }}/configure'
-
-  - include_tasks: tasks/configure_make_install.yml
-
-  - include_tasks: tasks/stow.yml
-
-  - name: Update systems shared libraries
-    command:
-      cmd: ldconfig
-    become: yes
-
-  - include_tasks: tasks/mark_as_installed.yml 
-
-  when: not installed.stat.exists
+- name: Update systems shared libraries
+  command:
+    cmd: ldconfig
+  become: true

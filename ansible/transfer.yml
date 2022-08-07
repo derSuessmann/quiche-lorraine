@@ -1,0 +1,63 @@
+- name: Transfer current ansible scripts to target
+  hosts: all
+
+  vars_files:
+  - vars/setup.yml
+  - vars/main.yml
+  
+  vars:
+    extra_path: '~/.local/bin'
+
+  tasks:
+  - name: Install required system packages
+    package:
+      name:
+        - rsync
+        - pip
+      state: latest
+    become: true
+
+  - name: Ensure ansible is not installed
+    package:
+      name:
+        - ansible
+      state: absent
+    become: true
+
+  - name: Install ansible latest
+    pip:
+      name:
+        - ansible
+      state: latest
+
+  - name: Copy directory
+    synchronize:
+      src: '../../'
+      dest: 'quiche-lorraine/'
+
+  - name: Overwrite hosts
+    copy:
+      content: |
+        [all]
+        localhost
+
+        [ham]
+        localhost
+      dest: 'quiche-lorraine/ansible/hosts'    
+
+  - name: Generate an OpenSSH keypair with the default values (4096 bits, rsa)
+    community.crypto.openssh_keypair:
+      path: .ssh/id_rsa
+      comment: 'local'
+
+  - name: Read the public key
+    slurp:
+      src: '/home/{{ ansible_user }}/.ssh/id_rsa.pub'
+    register: new_public_key
+
+
+  - name: Set authorized key took from file
+    authorized_key:
+      user: '{{ ansible_user }}'
+      state: present
+      key: "{{ new_public_key['content'] | b64decode }}"

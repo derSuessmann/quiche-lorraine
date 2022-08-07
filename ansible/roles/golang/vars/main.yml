@@ -1,9 +1,6 @@
 ---
 # vars file for golang
 
-pkg_name: golang
-version: 1.18.3
-name_version: '{{ pkg_name }}-{{ version }}'
-mirror: https://golang.org/dl/
-archive: 'go{{ version }}.linux-{{ golang_architecture }}.tar.gz'
-enabled: yes
+this_name: golang
+this_version: 1.18.3
+name_version: '{{ this_name }}-{{ this_version }}'

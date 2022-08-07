@@ -1,34 +1,43 @@
 ---
 # tasks file for wsjt-x
 
-- include_tasks: ../../tasks/check_installed.yml
+- name: Install system packages for {{ name_version }}
+  package:
+    name: '{{ required_system_packages }}'
+    state: latest
+  become: true
+  tags: 'prepare'
 
-- block:
+- include_role: 
+    name: get_source
+  vars:
+    method: 'git'
+    pkg_name: '{{ name_version }}'
+    source_uri: 'https://git.code.sf.net/p/wsjt/wsjtx'
+    destination: '{{ download_dir }}/{{ name_version }}'
+    commit: 'wsjtx-{{ this_version }}'
+  tags: 'get_source'
 
-  - include_tasks: ../../tasks/download_and_unarchive.yml
+- name: Remove conflicting system packages for {{ name_version }}
+  package:
+    name:
+    - wsjtx
+    state: absent
+  become: true
+  tags: 'cleanup'
 
-  - include_tasks: ../../tasks/install_required_system_packages.yml
+- include_role: 
+    name: build_install
+  vars:
+    method: 'cmake'
+    pkg_name: '{{ name_version }}'
+    source_path: '{{ download_dir }}/{{ name_version }}'
+    build_path: '{{ build_dir }}/{{ name_version }}'
+    install_path: '{{ stow_dir }}/{{ name_version }}'
 
-  # - name: Create build directory for {{ name_version }}
-  #   file:
-  #     state: directory
-  #     mode: 'u=rwx,go=rx'
-  #     dest: '{{ build_dir }}/{{ name_version }}-build'
+- name: Stow {{ name_version }}
+  command:
+    cmd: 'stow -R {{ name_version }}'
+    chdir: '{{ stow_dir }}'
+  become: true
 
-  # - name: Create stow directory for {{ name_version }}
-  #   # The cmake is a bit picky, if it cannot create the installation
-  #   # directory. Creating the directory before avoids running the
-  #   # build process with superuser privileges.
-  #   file:
-  #     state: directory
-  #     mode: 'u=rwx,go=rx'
-  #     dest: '{{ stow_dir }}/{{ name_version }}'
-  #   become: yes
-
-  - include_tasks: ../../tasks/cmake_make_install.yml
-
-  - include_tasks: ../../tasks/stow.yml
-
-  - include_tasks: ../../tasks/mark_as_installed.yml 
-
-  when: not installed.stat.exists

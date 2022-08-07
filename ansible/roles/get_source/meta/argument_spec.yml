@@ -1,0 +1,33 @@
+---
+# argument_specs file for get_sources
+
+argument_specs:
+  # roles/myapp/tasks/main.yml entry point
+  main:
+    short_description: 'Get the source code.'
+    options:
+      method:
+        description: 'Method for creating the Makefile'
+        type: 'str'
+        choices: ['download_archive', 'git']
+        required: true
+
+      pkg_name:
+        description: 'Name of the package. It is only used for displaying progress.'
+        type: 'str'
+        required: true
+
+      source_uri:
+        description: 'URI of the remote archive or repository.'
+        type: 'path'
+        required: true
+
+      destination:
+        desription: 'Path to the source directory.'
+        type: 'path'
+        required: true
+
+      version:
+        description: 'Version or commit hash to download. (Only used with git).'
+        type: 'str'
+        required: false

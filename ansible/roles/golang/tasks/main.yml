@@ -1,45 +1,39 @@
 ---
 # tasks file for golang
 
-- include_tasks: tasks/check_installed.yml
+- name: Download archives {{ name_version }}
+  get_url:
+    url: 'https://golang.org/dl/go{{ this_version }}.linux-{{ golang_architecture }}.tar.gz'
+    dest: '{{ download_dir }}/go{{ this_version }}.linux-{{ golang_architecture }}.tar.gz'
+    force: no
+    use_proxy: yes
+    validate_certs: yes
+    mode: 'u=rw,go=r'
 
-- block:
-  - name: Download archives {{ name_version }}
-    get_url:
-      url: '{{ mirror }}/{{ archive }}'
-      dest: '{{ download_dir }}/{{ archive }}'
-      force: no
-      use_proxy: yes
-      validate_certs: yes
-      mode: 'u=rw,go=r'
+- name: Extract '{{ name_version }}'
+  unarchive:
+    src: '{{ download_dir }}//go{{ this_version }}.linux-{{ golang_architecture }}.tar.gz'
+    remote_src: yes
+    dest: '{{ install_dir }}'
+    creates: '{{ install_dir }}/go'
+  become: true
 
-  - name: Extract '{{ name_version }}'
-    unarchive:
-      src: '{{ download_dir }}/{{ archive }}'
-      remote_src: yes
-      dest: '{{ install_dir }}'
-      creates: '{{ install_dir }}/go'
-    become: yes
+- name: Copy profile
+  copy:
+    content: |
+      #!/bin/sh
 
-  - name: Copy profile
-    copy:
-      content: |
-        #!/bin/sh
+      export GOROOT='{{ install_dir }}/go'
+      export PATH=$PATH:$GOROOT/bin
+    dest: '/etc/profile.d/golang.sh'
+    owner: root
+    group: root
+    mode: 'u=rwx,go=rx'
+  register: result
+  become: yes
 
-        export GOROOT='{{ install_dir }}/go'
-        export PATH=$PATH:$GOROOT/bin
-      dest: '/etc/profile.d/golang.sh'
-      owner: root
-      group: root
-      mode: 'u=rwx,go=rx'
-    register: result
-    become: yes
-
-  - include_tasks: tasks/mark_as_installed.yml
-
-  - name: Reboot to source new profile
-    reboot:
-    when: result.changed
-    become: yes
+- name: Reboot to source new profile
+  reboot:
+  when: result.changed
+  become: yes
   
-  when: not installed.stat.exists

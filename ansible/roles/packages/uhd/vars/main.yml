@@ -1,13 +1,9 @@
 ---
 # vars file for uhd
 
-pkg_name: uhd
-version: 'v4.2.0.0'
-name_version: '{{ pkg_name }}-{{ version }}'
-mirror: https://github.com/EttusResearch/uhd.git
-#archive: '{{ pkg_name }}_{{ version }}.tar.gz'
-pkg_build_dir: '{{ build_dir }}/{{ pkg_name }}-{{ version }}'
-stow_path: '{{ stow_dir }}/{{ name_version }}'
+this_name: uhd
+this_version: 'v4.2.0.0'
+name_version: '{{ this_name }}-{{ this_version }}'
 required_system_packages:
   - cmake
   - g++
@@ -43,5 +39,3 @@ required_system_packages:
   - python3-gi-cairo
   - python3-docutils
   - python3-pip
-cmake_defines: '-DNEON_SIMD_ENABLE=OFF'
-enabled: yes

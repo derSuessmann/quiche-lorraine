@@ -1,28 +1,48 @@
 ---
 # tasks file for liquid-dsp
 
-- include_tasks: tasks/check_installed.yml
+- name: Install system packages for {{ name_version }}
+  package:
+    name: '{{ required_system_packages }}'
+    state: latest
+  become: true
+  tags: 'prepare'
 
-- block:
+- include_role: 
+    name: get_source
+  vars:
+    method: 'git'
+    pkg_name: '{{ name_version }}'
+    source_uri: 'https://github.com/jgaeddert/liquid-dsp'
+    destination: '{{ download_dir }}/{{ name_version }}'
+    commit: 'v{{ this_version }}'
+  tags: 'get_source'
 
-  - include_tasks: tasks/git_versioned.yml
+- name: Remove conflicting system packages for {{ name_version }}
+  package:
+    name:
+    state: absent
+  become: true
+  tags: 'cleanup'
 
-  - include_tasks: tasks/install_required_system_packages.yml
+- include_role: 
+    name: build_install
+  vars:
+    method: 'configure'
+    pkg_name: '{{ name_version }}'
+    source_path: '{{ download_dir }}/{{ name_version }}'
+    build_path: '{{ download_dir }}/{{ name_version }}'
+    install_path: '{{ stow_dir }}/{{ name_version }}'
+    bootstrap_command: './bootstrap.sh'
+    bootstrapped: '{{ download_dir }}/{{ name_version }}/configure'
 
-  - name: Create autoconf 
-    command:
-      cmd: ./bootstrap.sh
-      chdir: '{{ pkg_build_dir  }}'
+- name: Stow {{ name_version }}
+  command:
+    cmd: 'stow -R {{ name_version }}'
+    chdir: '{{ stow_dir }}'
+  become: true
 
-  - include_tasks: tasks/configure_make_install.yml
-
-  - include_tasks: tasks/stow.yml
-
-  - name: Update systems shared libraries
-    command:
-      cmd: ldconfig
-    become: yes
-
-  - include_tasks: tasks/mark_as_installed.yml 
-
-  when: not installed.stat.exists
+- name: Update systems shared libraries
+  command:
+    cmd: ldconfig
+  become: true

@@ -1,13 +1,9 @@
 ---
 # vars file for kappanhang
 
-pkg_name: kappanhang
-version: '20210526'
-git_commit: '66f2369ef'
-name_version: '{{ pkg_name }}-{{ version }}'
-mirror: github.com/nonoo
-pkg_build_dir: '{{ build_dir }}/{{ pkg_name }}-{{ version }}'
-stow_path: '{{ stow_dir }}/{{ name_version }}'
+this_name: kappanhang
+this_version: '20210526'
+name_version: '{{ this_name }}-{{ this_version }}'
 required_system_packages:
+  - golang
   - libpulse-dev
-enabled: yes

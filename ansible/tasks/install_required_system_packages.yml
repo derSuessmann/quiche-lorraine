@@ -1,7 +1,0 @@
----
-
-- name: Install system packages for {{ name_version }}
-  package:
-    name: '{{ required_system_packages }}'
-    state: latest
-  become: yes

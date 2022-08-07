@@ -1,14 +1,9 @@
 ---
 # vars file for gr-osmosdr
 
-pkg_name: gr-osmosdr
-version: '20220610'
-git_commit: '821fdb3822b3ad258bdd4be79e5cd3d5964289fb'
-name_version: '{{ pkg_name }}-{{ version }}'
-mirror: https://gitea.osmocom.org/sdr/gr-osmosdr.git
-#archive: '{{ pkg_name }}_{{ version }}.tar.gz'
-pkg_build_dir: '{{ build_dir }}/{{ pkg_name }}-{{ version }}'
-stow_path: '{{ stow_dir }}/{{ name_version }}'
+this_name: gr-osmosdr
+this_version: '20220610'
+name_version: '{{ this_name }}-{{ this_version }}'
 required_system_packages:
   - git
   - cmake
@@ -22,5 +17,4 @@ required_system_packages:
   - libiio-dev
   - libad9361-dev
 #  - libfreesrp-dev
-enabled: yes
 
