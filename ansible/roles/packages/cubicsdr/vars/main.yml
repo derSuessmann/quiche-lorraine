@@ -1,5 +1,5 @@
 ---
-# vars file for CubicSDR
+# vars file for cubicsdr
 
 this_name: cubicsdr
 this_version: '0.2.7'

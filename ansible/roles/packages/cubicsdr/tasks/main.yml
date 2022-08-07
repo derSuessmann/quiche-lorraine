@@ -1,5 +1,5 @@
 ---
-# tasks file for wfview
+# tasks file for cubicsdr
 
 - name: Install system packages for {{ name_version }}
   package:
