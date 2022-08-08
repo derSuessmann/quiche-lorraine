@@ -1,0 +1,9 @@
+---
+# vars file for cm256cc
+
+this_name: cm256cc
+this_version: '1.1.0'
+name_version: '{{ this_name }}-{{ this_version }}'
+required_system_packages:
+  - build-essential
+  - cmake
