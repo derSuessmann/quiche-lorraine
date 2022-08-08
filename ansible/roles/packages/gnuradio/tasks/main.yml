@@ -45,3 +45,14 @@
   command:
     cmd: ldconfig
   become: true
+
+- name: Extend PYTHONPATH
+  copy:
+    content: |
+      if [ "x${PYTHONPATH}" != x ] then
+        export PYTHONPATH=/usr/local/lib/python3.9/site-packages
+      else
+        export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python3.9/site-packages
+      fi
+    dest: '/etc/profile.d/local_python.sh'
+  become: true
