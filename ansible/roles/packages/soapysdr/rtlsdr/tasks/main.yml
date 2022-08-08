@@ -15,7 +15,7 @@
     pkg_name: '{{ name_version }}'
     source_uri: 'https://github.com/pothosware/SoapyRTLSDR.git'
     destination: '{{ download_dir }}/{{ name_version }}'
-    commit: '80c93fbe189'
+    version: '80c93fbe189'
   tags: 'get_source'
 
 - name: Remove conflicting system packages for {{ name_version }}

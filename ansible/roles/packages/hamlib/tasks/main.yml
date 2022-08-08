@@ -15,7 +15,7 @@
     pkg_name: '{{ name_version }}'
     source_uri: 'https://github.com/Hamlib/Hamlib.git'
     destination: '{{ download_dir }}/{{ name_version }}'
-    commit: '{{ version }}'
+    version: '{{ version }}'
   tags: 'get_source'
 
 - name: Remove conflicting system packages for {{ name_version }}

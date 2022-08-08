@@ -15,7 +15,7 @@
     pkg_name: '{{ name_version }}'
     source_uri: 'https://gitea.osmocom.org/sdr/gr-osmosdr.git'
     destination: '{{ download_dir }}/{{ name_version }}'
-    commit: '821fdb3822'
+    version: '821fdb3822'
   tags: 'get_source'
 
 - name: Remove conflicting system packages for {{ name_version }}

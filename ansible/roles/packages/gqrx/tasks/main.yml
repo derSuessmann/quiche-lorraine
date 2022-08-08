@@ -15,7 +15,7 @@
     pkg_name: '{{ name_version }}'
     source_uri: 'https://github.com/gqrx-sdr/gqrx.git'
     destination: '{{ download_dir }}/{{ name_version }}'
-    commit: 'v{{ this_version }}'
+    version: 'v{{ this_version }}'
   tags: 'get_source'
 
 - name: Remove conflicting system packages for {{ name_version }}

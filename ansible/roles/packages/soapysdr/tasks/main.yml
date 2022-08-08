@@ -15,7 +15,7 @@
     pkg_name: '{{ name_version }}'
     source_uri: 'https://github.com/pothosware/SoapySDR.git'
     destination: '{{ download_dir }}/{{ name_version }}'
-    commit: '1cf5a539'
+    version: '1cf5a539'
   tags: 'get_source'
 
 - name: Remove conflicting system packages for {{ name_version }}
