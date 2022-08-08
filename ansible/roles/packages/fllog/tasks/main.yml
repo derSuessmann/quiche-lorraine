@@ -9,7 +9,7 @@
   tags: 'prepare'
 
 - include_role:
-    name: get_download_unarchive
+    name: get_source
   vars:
     method: 'download_archive'
     pkg_name: '{{ name_version }}'
