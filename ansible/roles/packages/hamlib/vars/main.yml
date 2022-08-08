@@ -2,8 +2,8 @@
 # vars file for hamlib
 
 this_name: hamlib
-version: '4.4'
-name_version: '{{ this_name }}-{{ version }}'
+this_version: '4.4'
+name_version: '{{ this_name }}-{{ this_version }}'
 required_system_packages:
   - build-essential
   - libtool
