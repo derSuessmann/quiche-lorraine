@@ -11,11 +11,10 @@
 - include_role: 
     name: get_source
   vars:
-    method: 'git'
+    method: 'download_archive'
     pkg_name: '{{ name_version }}'
-    source_uri: 'https://git.code.sf.net/p/wsjt/wsjtx'
+    source_uri: 'https://physics.princeton.edu/pulsar/k1jt/wsjtx-{{ this_version }}.tgz'
     destination: '{{ download_dir }}/{{ name_version }}'
-    commit: 'wsjtx-{{ this_version }}'
   tags: 'get_source'
 
 - name: Remove conflicting system packages for {{ name_version }}
