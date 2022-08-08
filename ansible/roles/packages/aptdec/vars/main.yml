@@ -1,0 +1,12 @@
+---
+# vars file for aptdec
+
+this_name: aptdec
+this_version: '2022-07-19'
+name_version: '{{ this_name }}-{{ this_version }}'
+commit: e390f87
+required_system_packages:
+  - build-essential
+  - cmake
+  - libsndfile-dev
+  - libpng-dev
