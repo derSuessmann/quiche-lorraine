@@ -1,0 +1,86 @@
+---
+# argument_specs file for standard_package
+
+argument_specs:
+  # roles/myapp/tasks/main.yml entry point
+  main:
+    short_description: 'Download, configure build, build it and install the package.'
+    options:
+      get_method:
+        description: 'Method for creating the Makefile'
+        type: 'str'
+        choices: ['download_archive', 'git']
+        required: true
+
+      build_method:
+        description: 'Method for creating the Makefile'
+        type: 'str'
+        choices: ['cmake', 'qmake', 'configure']
+        required: true
+
+      pkg_name:
+        description: 'Name of the package. It is only used for displaying progress.'
+        type: 'str'
+        required: true
+
+      source_uri:
+        description: 'URI of the remote archive or repository.'
+        type: 'path'
+        required: true
+
+      destination:
+        desription: 'Path to the source directory.'
+        type: 'path'
+        required: true
+
+      version:
+        description: 'Version or commit hash to download. (Only used with git).'
+        type: 'str'
+        required: false
+
+      source_path:
+        description: 'Path to the sources.'
+        type: 'path'
+        required: true
+
+      build_path:
+        description: 'Path to the build directory for this package. The directory will be created, if not existing.'
+        type: 'path'
+        required: true
+
+      install_path:
+        description: 'Path to the directory, where the package is installed.'
+        type: 'path'
+        required: true
+
+      qmake_profile:
+        description: 'Path to the qmake profile file.'
+        type: 'path'
+        default: ''
+
+      qmake_defines:
+        description: 'Defines passed to qmake.'
+        type: 'str'
+        default: ''
+
+      cmake_defines:
+        description: 'Defines passed to cmake.'
+        type: 'str'
+        default: ''
+
+      configure_options:
+        description: 'Options passed to configure.'
+        type: 'str'
+        default: ''
+
+      bootstrap_command:
+        description: 'Command to run before configuring the build. E.g. autoconf.'
+        type: 'path'
+
+      bootstrapped:
+        description: 'Path to file created by bootstrap_command.'
+        type: 'path'
+ 
+      ldconfig:
+        description: 'Run ldconfig after stowing.'
+        type: 'boolean'

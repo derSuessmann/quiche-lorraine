@@ -1,0 +1,21 @@
+---
+# vars file for build_install
+
+get_method:        # method to create the configuration ('git', or 'download_archive')
+build_method:      # method to create the configuration ('qmake', 'cmake' or 'configure')
+
+pkg_name:          # name of the package, this name is only used to show the progress
+source_uri:        # uri of the remote archive
+destination:       # path to the source directory
+
+source_path:       # path to the source code
+build_path:        # path where the package will be built/compiled
+install_path:      # path where the package will be installed, this should be the stow path
+
+bootstrap_command: # something to run before configuring the build (could be autoconf...)
+bootstrapped:      # canary showing bootstrap_command has been run
+
+configure_options: # options for the configure script
+cmake_defines:     # defines for cmake
+
+ldconfig:          # run ldconfig after stowing
