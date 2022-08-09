@@ -1,0 +1,14 @@
+---
+# vars file for dsdcc
+
+this_name: dsdcc
+this_version: '2022-06-21'
+this_repository: 'https://github.com/f4exb/dsdcc.git'
+commit: 4e954c27
+
+name_version: '{{ this_name }}-{{ this_version }}'
+
+this_required_system_packages:
+  - build-essential
+  - cmake
+this_conflicting_system_packages:

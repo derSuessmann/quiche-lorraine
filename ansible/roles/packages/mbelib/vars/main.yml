@@ -1,0 +1,10 @@
+---
+# vars file for mbelib
+
+this_name: mbelib
+this_version: '2019-05-29'
+name_version: '{{ this_name }}-{{ this_version }}'
+commit: 9a04ed5
+required_system_packages:
+  - build-essential
+  - cmake

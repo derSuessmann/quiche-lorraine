@@ -1,0 +1,42 @@
+---
+# tasks file for libdab
+
+- name: Install system packages for {{ name_version }}
+  package:
+    name: '{{ required_system_packages }}'
+    state: latest
+  become: true
+  tags: 'prepare'
+
+- include_role: 
+    name: get_source
+  vars:
+    method: 'git'
+    pkg_name: '{{ name_version }}'
+    source_uri: 'https://github.com/JvanKatwijk/dab-cmdline.git'
+    destination: '{{ download_dir }}/{{ name_version }}'
+    version: '{{ commit }}'
+  tags: 'get_source'
+
+- name: Remove conflicting system packages for {{ name_version }}
+  package:
+    name:
+    state: absent
+  become: true
+  tags: 'cleanup'
+
+- include_role: 
+    name: build_install
+  vars:
+    method: 'cmake'
+    pkg_name: '{{ name_version }} library'
+    source_path: '{{ download_dir }}/{{ name_version }}/library'
+    build_path: '{{ build_dir }}/{{ name_version }}/library'
+    install_path: '{{ stow_dir }}/{{ name_version }}'
+    cmake_defines: '-Wno-dev'
+
+- name: Stow {{ name_version }}
+  command:
+    cmd: 'stow -R {{ name_version }}'
+    chdir: '{{ stow_dir }}'
+  become: true

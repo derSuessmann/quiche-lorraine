@@ -1,0 +1,23 @@
+---
+# vars file for libdab
+
+this_name: libdab
+this_version: '2022-06-21'
+name_version: '{{ this_name }}-{{ this_version }}'
+commit: 38d51e6
+required_system_packages:
+  - build-essential
+  - cmake
+  - libsndfile-dev
+  - libpng-dev
+  - g++
+  - pkg-config
+  - libsndfile1-dev
+  - libfftw3-dev
+  - portaudio19-dev
+  - libfaad-dev
+  - zlib1g-dev 
+  - libusb-1.0-0-dev
+  - mesa-common-dev
+  - libgl1-mesa-dev
+  - libsamplerate0-dev

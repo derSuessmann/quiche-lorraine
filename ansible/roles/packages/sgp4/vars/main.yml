@@ -1,0 +1,14 @@
+---
+# vars file for sgp4
+
+this_name: sgp4
+this_version: '2021-01-11'
+this_repository: 'https://github.com/dnwrnr/sgp4.git'
+commit: ca9d4d97
+
+name_version: '{{ this_name }}-{{ this_version }}'
+
+this_required_system_packages:
+  - build-essential
+  - cmake
+this_conflicting_system_packages:
