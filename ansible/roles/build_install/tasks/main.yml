@@ -5,7 +5,7 @@
   file:
     state: directory
     mode: 'u=rwx,go=rx'
-    dest: '{{ build_path }}/build'
+    dest: '{{ build_path }}'
 
 - name: Bootstrap build of {{ pkg_name }}
   command:
