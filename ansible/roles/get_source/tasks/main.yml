@@ -25,4 +25,4 @@
       remote_src: yes
       dest: '{{ destination | dirname }}'
       creates: '{{ destination }}'
-    when: method == 'download_archive'
+  when: method == 'download_archive'
