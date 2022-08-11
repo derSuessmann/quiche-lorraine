@@ -12,6 +12,9 @@
       become: yes
       tags: prepare
 
+    - role: packages/sdrangel
+      tags: sdrangel
+
     - role: packages/gqrx
       tags: gqrx
 
