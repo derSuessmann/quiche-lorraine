@@ -1,0 +1,29 @@
+---
+# vars file for hackrf
+
+this_name: hackrf
+this_version: '2021.03.1'
+this_repository: 'https://github.com/mossmann/hackrf.git'
+
+name_version: '{{ this_name }}-{{ this_version }}'
+
+this_cmake_defines: '-Wno-dev -DINSTALL_UDEV_RULES=OFF'
+
+this_required_system_packages:
+  - git
+  - cmake
+  - libxml2
+  - libxml2-dev
+  - bison
+  - flex
+  - libcdk5-dev
+  - libaio-dev
+  - libusb-1.0-0-dev
+  - libserialport-dev
+  - libxml2-dev
+  - libavahi-client-dev
+  - doxygen
+  - graphviz
+this_conflicting_system_packages:
+  - rtl-sdr
+  - soapysdr-module-rtlsdr

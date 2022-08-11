@@ -1,0 +1,20 @@
+---
+# vars file for rtlsdr
+
+this_name: rtlsdr
+this_version: '2022-01-19'
+this_commit: '5e73f90f1'
+this_repository: 'https://github.com/osmocom/rtl-sdr.git'
+
+name_version: '{{ this_name }}-{{ this_version }}'
+
+this_cmake_defines: '-Wno-dev -DDETACH_KERNEL_DRIVER=ON'
+
+this_required_system_packages:
+  - git
+  - cmake
+  - libusb-1.0-0-dev
+  - libusb-dev
+this_conflicting_system_packages:
+  - rtl-sdr
+  - soapysdr-module-rtlsdr

@@ -27,11 +27,3 @@ dependencies:
   - role: packages/libsigmf
     tags: libsigmf
 
-  - role: packages/rtlsdr
-    tags: rtlsdr
-
-  - role: packages/libiio
-    tags: libiio
-
-  - role: packages/hackrf
-    tags: hackrf
