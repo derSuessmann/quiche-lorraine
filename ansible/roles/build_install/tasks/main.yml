@@ -7,6 +7,13 @@
     mode: 'u=rwx,go=rx'
     dest: '{{ build_path }}'
 
+- name: Create install directory for {{ pkg_name }}
+  file:
+    state: directory
+    mode: 'u=rwx,go=rx'
+    dest: '{{ install_path }}'
+  become: true
+
 - name: Bootstrap build of {{ pkg_name }}
   command:
     cmd: '{{ bootstrap_command | default("does nothing") }}'
