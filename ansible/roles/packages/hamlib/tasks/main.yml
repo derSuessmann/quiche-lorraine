@@ -34,7 +34,7 @@
     source_path: '{{ download_dir }}/{{ name_version }}'
     build_path: '{{ build_dir }}/{{ name_version }}'
     install_path: '{{ stow_dir }}/{{ name_version }}'
-    configure_options: '--with-xml-support --with-readline --with-python-binding --with-tcl-binding --with-lua-binding'
+    configure_options: '--with-xml-support --with-readline --with-python-binding --with-tcl-binding --with-lua-binding PYTHON=/usr/bin/python3'
     bootstrap_command: './bootstrap'
     bootstrapped: '{{ download_dir }}/{{ name_version }}/configure'
 
