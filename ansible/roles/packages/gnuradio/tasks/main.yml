@@ -36,8 +36,8 @@
     install_path: '{{ stow_dir }}/{{ name_version }}'
 
 - name: Stow {{ name_version }}
-  command:
-    cmd: 'stow -R {{ name_version }}'
+  shell:
+    cmd: "stow -R --override='share.*gnuradio-grc.*' --ignore='share.*mimeinfo.cache' {{ name_version }}"
     chdir: '{{ stow_dir }}'
   become: true
 
@@ -49,7 +49,7 @@
 - name: Extend PYTHONPATH
   copy:
     content: |
-      if [ "x${PYTHONPATH}" != x ] then
+      if [ "x${PYTHONPATH}" != x ]; then
         export PYTHONPATH=/usr/local/lib/python3.9/site-packages
       else
         export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python3.9/site-packages
