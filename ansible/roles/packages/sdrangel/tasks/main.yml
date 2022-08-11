@@ -1,5 +1,5 @@
 ---
-# tasks file for sgp4
+# tasks file for sdrangel
 
 - include_role: 
     name: standard_package
@@ -16,3 +16,4 @@
     build_path: '{{ build_dir }}/{{ name_version }}'
     install_path: '{{ stow_dir }}/{{ name_version }}'
     ldconfig: true
+    stow_options: "--defer='share.*gnuradio-grc.*' --ignore='share.*mimeinfo.cache'"

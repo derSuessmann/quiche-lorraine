@@ -84,3 +84,8 @@ argument_specs:
       ldconfig:
         description: 'Run ldconfig after stowing.'
         type: 'boolean'
+
+      stow_options:
+        description: 'Additional arguments for stow'
+        type: 'get_source'
+        default: ''

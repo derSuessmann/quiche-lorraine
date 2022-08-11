@@ -35,8 +35,8 @@
     #install_path: '{{ stow_path }}'
 
 - name: Stow {{ pkg_name }}
-  command:
-    cmd: 'stow -R {{ pkg_name }}'
+  shell:
+    cmd: 'stow -R {{ stow_options }} {{ pkg_name }}'
     chdir: '{{ stow_dir }}'
   become: true
 

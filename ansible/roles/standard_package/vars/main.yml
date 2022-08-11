@@ -19,3 +19,5 @@ configure_options: # options for the configure script
 cmake_defines:     # defines for cmake
 
 ldconfig:          # run ldconfig after stowing
+
+stow_options:      # additional argugemnts for stow
