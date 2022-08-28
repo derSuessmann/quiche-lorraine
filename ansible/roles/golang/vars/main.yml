@@ -4,3 +4,6 @@
 this_name: golang
 this_version: 1.18.3
 name_version: '{{ this_name }}-{{ this_version }}'
+
+# Go is not available for armv7l, but armv6l
+golang_architecture: "{{ 'armv6l' if ansible_architecture == 'armv7l' else 'arm64' if ansible_architecture == 'aarch64' else 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}"

@@ -23,6 +23,3 @@ stow_dir: /usr/local/stow
 
 # Number of jobs used in make run
 make_jobs_number: '{{ ansible_processor_vcpus }}'
-
-# Go is not available for armv7l, but armv6l
-golang_architecture: "{{ 'armv6l' if ansible_architecture == 'armv7l' else 'arm64' if ansible_architecture == 'aarch64' else ansible_architecture }}"
