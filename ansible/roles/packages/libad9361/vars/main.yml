@@ -1,0 +1,30 @@
+---
+# vars file for libad9361
+
+this_name: libad9361
+this_version: '2022-07-27'
+this_repository: 'https://github.com/analogdevicesinc/libad9361-iio.git'
+
+this_commit: 96230e68
+
+name_version: '{{ this_name }}-{{ this_version }}'
+
+this_required_system_packages:
+  - git
+  - cmake
+  - libxml2
+  - libxml2-dev
+  - bison
+  - flex
+  - libcdk5-dev
+  - libaio-dev
+  - libusb-1.0-0-dev
+  - libserialport-dev
+  - libxml2-dev
+  - libavahi-client-dev
+  - doxygen
+  - graphviz
+this_conflicting_system_packages:
+  - libiio*
+  - gr-iio
+  - libad9361*

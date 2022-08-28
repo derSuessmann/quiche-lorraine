@@ -1,0 +1,4 @@
+---
+dependencies:
+  - role: packages/libiio
+    tags: libiio

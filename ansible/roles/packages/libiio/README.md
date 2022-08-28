@@ -18,7 +18,7 @@ It follows the standard cmake build process. The role uses this.
 # References
 
 - [libiio repository][1] (last visited 2022-08-09)
-- [README][2] (last visited 2022-08-09)
+- [Wiki][2] (last visited 2022-08-09)
 
 [1]: https://github.com/analogdevicesinc/libiio
 [2]: https://wiki.analog.com/resources/tools-software/linux-software/libiio#how_to_build_it

@@ -4,6 +4,5 @@
 this_name: soapyplutosdr
 this_version: '2022-02-07'
 name_version: '{{ this_name }}-{{ this_version }}'
+
 required_system_packages:
-  - libiio-dev
-  - libad9361-dev

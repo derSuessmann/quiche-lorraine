@@ -1,3 +1,15 @@
 ---
 dependencies:
   - role: gnuradio
+
+  - role: packages/libiio
+    tags: libiio
+
+  - role: packages/libad9361
+    tags: libad9361
+
+  - role: packages/rtlsdr
+    tags: rtlsdr
+
+  - role: packages/hackrf
+    tags: hackrf

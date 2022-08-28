@@ -11,10 +11,4 @@ required_system_packages:
   - libpython3-dev
   - python3-numpy
   - swig
-  - librtlsdr-dev
-  - libairspy-dev
-  - libhackrf-dev
-  - libiio-dev
-  - libad9361-dev
-#  - libfreesrp-dev
 
