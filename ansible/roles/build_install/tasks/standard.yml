@@ -1,0 +1,58 @@
+---
+# tasks file for build_install
+
+- name: Create build directory for {{ pkg_name }}
+  file:
+    state: directory
+    mode: 'u=rwx,go=rx'
+    dest: '{{ build_path }}'
+
+- name: Create install directory for {{ pkg_name }}
+  file:
+    state: directory
+    mode: 'u=rwx,go=rx'
+    dest: '{{ install_path }}'
+  become: true
+
+- name: Bootstrap build of {{ pkg_name }}
+  command:
+    cmd: '{{ bootstrap_command | default("does nothing") }}'
+    chdir: '{{ source_path }}'
+    creates: '{{ bootstrapped }}'
+  when: bootstrap_command is defined and bootstrap_command != None
+
+- name: Create Makefile for {{ name_version }} (qmake)
+  command:
+    cmd: qmake -makefile '{{ source_path }}/{{ qmake_profile }}' {{ qmake_defines | default("") }}
+    chdir: '{{ build_path }}'
+    creates: '{{ build_path }}/Makefile'
+  when: method == 'qmake'
+
+- name: Create Makefile for {{ pkg_name }} (cmake)
+  command:
+    cmd: cmake '{{ cmake_defines | default("") }}' -D CMAKE_INSTALL_PREFIX='{{ install_path }}' {{ source_path }}
+    chdir: '{{ build_path }}'
+    creates: '{{ build_path }}/Makefile'
+  when: method == 'cmake'
+
+- name: Create Makefile for {{ pkg_name }} (configure)
+  command:
+    cmd: '{{ source_path }}/configure --prefix={{ install_path }} {{ configure_options | default("") }}'
+    chdir: '{{ build_path }}'
+    creates: '{{ build_path }}/Makefile'
+  when: method == 'configure'
+
+- name: Build {{ pkg_name }}
+  make:
+    chdir: '{{ build_path }}'
+    params:
+      PREFIX: '{{ install_path }}'
+    jobs: '{{ make_jobs_number }}'        
+
+- name: Install {{ pkg_name }}
+  make:
+    chdir: '{{ build_path }}'
+    target: install
+    params:
+      PREFIX: '{{ install_path }}'
+  become: true

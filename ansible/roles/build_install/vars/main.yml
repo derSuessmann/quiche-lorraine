@@ -12,3 +12,5 @@ bootstrapped:      # canary showing bootstrap_command has been run
 
 configure_options: # options for the configure script
 cmake_defines:     # defines for cmake
+qmake_profile:     # profile for qmake
+qmake_defines:     # defines for qmake
