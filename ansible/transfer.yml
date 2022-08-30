@@ -16,6 +16,7 @@
         - pip
       state: latest
     become: true
+    tags: 'prepare'
 
   - name: Ensure ansible is not installed
     package:
@@ -23,17 +24,20 @@
         - ansible
       state: absent
     become: true
+    tags: 'prepare'
 
   - name: Install ansible latest
     pip:
       name:
         - ansible
       state: latest
+    tags: 'prepare'
 
   - name: Copy directory
     synchronize:
       src: '../../'
       dest: 'quiche-lorraine/'
+      delete: true
 
   - name: Overwrite hosts
     copy:
@@ -49,15 +53,17 @@
     community.crypto.openssh_keypair:
       path: .ssh/id_rsa
       comment: 'local'
+    tags: 'prepare'
 
   - name: Read the public key
     slurp:
       src: '/home/{{ ansible_user }}/.ssh/id_rsa.pub'
     register: new_public_key
-
+    tags: 'prepare'
 
   - name: Set authorized key took from file
     authorized_key:
       user: '{{ ansible_user }}'
       state: present
       key: "{{ new_public_key['content'] | b64decode }}"
+    tags: 'prepare'
