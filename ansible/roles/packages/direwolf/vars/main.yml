@@ -1,0 +1,19 @@
+---
+# vars file for direwolf
+
+this_name: direwolf
+this_version: '1.6'
+this_repository: 'https://github.com/wb2osz/direwolf.git'
+
+name_version: '{{ this_name }}-{{ this_version }}'
+
+this_required_system_packages:
+  - git
+  - gcc
+  - gpp
+  - make
+  - cmake
+  - libasound2-dev
+  - libudev-dev
+this_conflicting_system_packages:
+  - direwolf

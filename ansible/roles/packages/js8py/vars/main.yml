@@ -1,0 +1,14 @@
+---
+# vars file for js8py
+
+this_name: js8py
+this_version: '0.1.2'
+this_repository: 'https://github.com/jketterl/js8py.git'
+
+name_version: '{{ this_name }}-{{ this_version }}'
+
+this_required_system_packages:
+  - git
+  - libpython3-dev
+this_conflicting_system_packages:
+  - js8py

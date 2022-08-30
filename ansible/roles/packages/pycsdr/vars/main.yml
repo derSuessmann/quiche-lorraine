@@ -1,0 +1,15 @@
+---
+# vars file for pycsdr
+
+this_name: pycsdr
+this_version: '0.18.0'
+this_repository: 'https://github.com/jketterl/pycsdr.git'
+
+name_version: '{{ this_name }}-{{ this_version }}'
+
+this_required_system_packages:
+  - git
+  - build-essential
+  - libpython3-dev
+this_conflicting_system_packages:
+  - pycsdr

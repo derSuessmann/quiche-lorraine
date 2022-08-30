@@ -1,0 +1,17 @@
+---
+# vars file for csdr
+
+this_name: csdr
+this_version: '0.18.0'
+this_repository: 'https://github.com/jketterl/csdr.git'
+
+name_version: '{{ this_name }}-{{ this_version }}'
+
+this_required_system_packages:
+  - git
+  - build-essential
+  - cmake
+  - libfftw3-dev
+  - libsamplerate-dev
+this_conflicting_system_packages:
+  - csdr

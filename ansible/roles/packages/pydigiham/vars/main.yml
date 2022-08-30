@@ -1,0 +1,16 @@
+---
+# vars file for pydigiham
+
+this_name: pydigiham
+this_version: '0.6.0'
+this_repository: 'https://github.com/jketterl/pydigiham.git'
+
+name_version: '{{ this_name }}-{{ this_version }}'
+
+this_required_system_packages:
+  - git
+  - build-essential
+  - libpython3-dev
+this_conflicting_system_packages:
+  - pydigiham
+

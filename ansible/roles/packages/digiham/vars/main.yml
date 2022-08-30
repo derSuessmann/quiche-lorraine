@@ -1,0 +1,16 @@
+---
+# vars file for digiham
+
+this_name: digiham
+this_version: '0.6.0'
+this_repository: 'https://github.com/jketterl/digiham.git'
+
+name_version: '{{ this_name }}-{{ this_version }}'
+
+this_required_system_packages:
+  - git
+  - build-essential
+  - cmake
+  - libicu-dev
+this_conflicting_system_packages:
+  - digiham

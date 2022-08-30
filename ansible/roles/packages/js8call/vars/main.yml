@@ -1,0 +1,32 @@
+---
+# vars file for js8call
+
+this_name: js8call
+this_version: '2.2.0-ga'
+this_repository: 'https://bitbucket.org/widefido/js8call.git'
+
+name_version: '{{ this_name }}-{{ this_version }}'
+
+
+this_required_system_packages:
+  - git
+  - build-essential
+  - gcc
+  - g++
+  - gfortran
+  - clang
+  - cmake
+  - git
+  - asciidoc
+  - asciidoctor
+  - texinfo
+  - qtmultimedia5-dev
+  - libqt5serialport5-dev
+  - qttools5-dev
+  - qttools5-dev-tools
+  - libboost-all-dev
+  - libfftw3-dev
+  - libreadline-dev
+  - libusb-1.0-0-dev
+  - libudev-dev
+  - libnova-dev

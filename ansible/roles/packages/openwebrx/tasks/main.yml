@@ -1,0 +1,56 @@
+---
+# tasks file for openwebrx
+
+- name: Install system packages for {{ name_version }}
+  package:
+    name: '{{ required_system_packages }}'
+    state: latest
+  become: true
+  tags: 'prepare'
+
+- name: Remove conflicting system packages for {{ name_version }}
+  package:
+    name: '{{ this_conflicting_system_packages }}'
+    state: absent
+  become: true
+  tags: 'cleanup'
+
+- name: Create user for {{ name_version }}
+  user:
+    name: '{{ openwebrx_user }}'
+    state: present
+  become: true
+    
+- name: Create directory for data storage for {{ name_version }}
+  file:
+    path: '{{ openwebrx_varlib }}'
+    state: directory
+    owner: '{{ openwebrx_user }}'
+    mode: '0755'
+  become: true
+
+- name: Create user database for {{ name_version }}
+  template:
+    src: users.json.j2
+    dest: '{{ openwebrx_varlib }}/users.json'
+    owner: '{{ openwebrx_user }}'
+    mode: '0600'
+  become: true
+
+- include_role: 
+    name: standard_package
+  vars:
+    pkg_name: '{{ name_version }}'
+    get_method: 'git'
+    build_method: 'python_setup'
+    required_system_packages: '{{ this_required_system_packages }}'
+    conflicting_system_packages: '{{ this_conflicting_system_packages }}'
+    source_uri: '{{ this_repository }}'
+    destination: '{{ download_dir }}/{{ name_version }}'
+    version: '{{ this_version }}'
+    source_path: '{{ download_dir }}/{{ name_version }}'
+    build_path: '{{ build_dir }}/{{ name_version }}'
+    install_path: '{{ stow_dir }}/{{ name_version }}'
+  
+# cd openwebrx
+# ./openwebrx.py

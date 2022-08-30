@@ -1,0 +1,4 @@
+---
+dependencies:
+  - role: js8call
+    tags: js8call

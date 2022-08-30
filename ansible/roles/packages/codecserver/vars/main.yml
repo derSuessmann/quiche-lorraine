@@ -1,0 +1,20 @@
+---
+# vars file for codecserver
+
+this_name: codecserver
+this_version: '0.2.0'
+this_repository: 'https://github.com/jketterl/codecserver.git'
+
+name_version: '{{ this_name }}-{{ this_version }}'
+
+this_required_system_packages:
+  - git
+  - build-essential
+  - cmake
+  - libprotobuf-dev
+  - protobuf-compiler
+  - libudev-dev
+this_conflicting_system_packages:
+  - csdr
+
+codecserver_user: 'codecserver'

@@ -1,0 +1,29 @@
+---
+# vars file for dream
+
+this_name: dream
+this_version: ollie
+name_version: '{{ this_name }}-{{ this_version }}'
+
+#this_source_uri: 'https://sourceforge.net/projects/drm/files/dream/2.2/dream_2.2.orig.tar.gz'
+this_repository: 'svn://svn.code.sf.net/p/drm/code/branches/dream-{{ this_version }}'
+this_qmake_defines: 'PREFIX={{ stow_dir }}/{{ name_version }} CONFIG+=console'
+this_qmake_profile: 'dream.pro'
+
+required_system_packages:
+  - subversion
+  - qt5-qmake
+  - libpulse0
+  - libfaad2
+  - libopus0
+  - libpulse-dev
+  - libfaad-dev
+  - libopus-dev
+  - libfftw3-dev
+  - libfaac-dev
+  - libfdk-aac2
+  - libfdk-aac-dev
+  - libpcap-dev
+  - libspeex-dev
+  - libspeexdsp-dev
+  

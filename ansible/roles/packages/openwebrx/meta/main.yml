@@ -1,0 +1,22 @@
+---
+dependencies:
+  - role: rtlsdr
+    tags: rtlsdr
+  - role: pycsdr
+    tags: pycsdr
+  - role: js8py
+    tags: js8py
+  - role: pydigiham
+    tags: pydigiham
+  - role: codec2
+    tags: codec2
+  - role: codecserver
+    tags: codecserver
+  - role: m17-cxx-demod
+    tags: m17-cxx-demod
+  - role: dream
+    tags: dream
+  - role: direwolf
+    tags: direwolf
+  - role: wsjtx
+    tags: wsjtx

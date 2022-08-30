@@ -1,0 +1,16 @@
+---
+# vars file for m17-cxx-demod
+
+this_name: m17-cxx-demod
+this_version: '2.3'
+this_repository: 'https://github.com/mobilinkd/m17-cxx-demod.git'
+
+name_version: '{{ this_name }}-{{ this_version }}'
+
+
+this_required_system_packages:
+  - git
+  - build-essential
+  - cmake
+
+this_conflicting_system_packages:
