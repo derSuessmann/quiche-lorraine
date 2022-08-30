@@ -2,3 +2,6 @@
 dependencies:
   - role: packages/libiio
     tags: libiio
+  - role: packages/libad9361
+    tags: libad9361
+
