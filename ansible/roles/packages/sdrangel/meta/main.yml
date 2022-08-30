@@ -18,8 +18,8 @@ dependencies:
   - role: packages/dsdcc
     tags: dsdcc
 
-  - role: packages/freedv
-    tags: freedv
+  - role: packages/codec2
+    tags: codec2
 
   - role: packages/sgp4
     tags: sgp4
