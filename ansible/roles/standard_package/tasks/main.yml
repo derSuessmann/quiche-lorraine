@@ -12,10 +12,7 @@
     name: get_source
   vars:
     method: '{{ get_method }}'
-    #pkg_name: '{{ pkg_name }}'
-    #source_uri: '{{ source_uri }}'
     destination: '{{ download_dir }}/{{ pkg_name }}'
-    #version: '{{ commit }}'
   tags: 'get_source'
 
 - name: Remove conflicting system packages for {{ pkg_name }}
@@ -29,10 +26,6 @@
     name: build_install
   vars:
     method: '{{ build_method }}'
-    #pkg_name: '{{ pkg_name }}'
-    #source_path: '{{ source_path }}'
-    #build_path: '{{ build_path }}'
-    #install_path: '{{ stow_path }}'
 
 - name: Stow {{ pkg_name }}
   shell:
