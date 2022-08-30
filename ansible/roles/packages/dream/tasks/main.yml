@@ -8,7 +8,7 @@
   become: true
   tags: 'prepare'
 
-- name: Export subversion directory for {{ name_version }}
+- name: Checkout subversion directory for {{ name_version }}
   ansible.builtin.subversion:
     repo: '{{ this_repository }}'
     dest: '{{ download_dir }}/{{ name_version }}'
