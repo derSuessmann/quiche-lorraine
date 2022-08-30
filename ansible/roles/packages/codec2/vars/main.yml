@@ -1,14 +1,17 @@
 ---
-# vars file for freedv
+# vars file for codec2
 
-this_name: freedv
-this_version: '2022-08-07'
+this_name: codec2
+this_version: '1.0.5'
 this_repository: 'https://github.com/drowe67/codec2.git'
-commit: 6f2553b
 
 name_version: '{{ this_name }}-{{ this_version }}'
 
+
 this_required_system_packages:
+  - git
   - build-essential
   - cmake
+
 this_conflicting_system_packages:
+  - libcodec2*

@@ -1,5 +1,5 @@
 ---
-# tasks file for freedv
+# tasks file for codec2
 
 - include_role: 
     name: standard_package
@@ -11,8 +11,9 @@
     conflicting_system_packages: '{{ this_conflicting_system_packages }}'
     source_uri: '{{ this_repository }}'
     destination: '{{ download_dir }}/{{ name_version }}'
-    version: '{{ commit }}'
+    version: 'v{{ this_version }}'
     source_path: '{{ download_dir }}/{{ name_version }}'
     build_path: '{{ build_dir }}/{{ name_version }}'
     install_path: '{{ stow_dir }}/{{ name_version }}'
+    cmake_defines: '{{ this_cmake_defines }}'
     ldconfig: true
