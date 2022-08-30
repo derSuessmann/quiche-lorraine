@@ -18,7 +18,7 @@
     cmake_defines: '{{ this_cmake_defines }}'
     ldconfig: false
 
-- name: Create user for {{ pkg_name }}
+- name: Create user for {{ name_version }}
   user:
     name: '{{ codecserver_user }}'
     state: present
