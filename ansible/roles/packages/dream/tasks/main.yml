@@ -1,41 +1,8 @@
 ---
 # tasks file for dream
 
-- name: Install system packages for {{ name_version }}
-  package:
-    name: '{{ required_system_packages }}'
-    state: latest
-  become: true
-  tags: 'prepare'
+- name: Install {{ this_name }}-{{ this_version }}
+  include_tasks: install.yml
+  when: ansible_local[this_name] is not defined or ansible_local[this_name]['pkg_version'] != this_version
 
-- name: Checkout subversion directory for {{ name_version }}
-  ansible.builtin.subversion:
-    repo: '{{ this_repository }}'
-    dest: '{{ download_dir }}/{{ name_version }}'
-    checkout: yes
-  tags: 'get_source'
 
-- name: Remove conflicting system packages for {{ name_version }}
-  package:
-    name: '{{ this_conflicting_system_packages }}'
-    state: absent
-  become: true
-  tags: 'cleanup'
-
-- include_role: 
-    name: build_install
-  vars:
-    method: 'qmake'
-    pkg_name: '{{ name_version }}'
-    source_path: '{{ download_dir }}/{{ name_version }}'
-    build_path: '{{ build_dir }}/{{ name_version }}'
-    install_path: '{{ stow_dir }}/{{ name_version }}'
-    qmake_defines: '{{ this_qmake_defines }}'
-    qmake_profile: '{{ this_qmake_profile }}'
-  tags: 'build_install'
-
-- name: Stow {{ name_version }}
-  command:
-    cmd: 'stow -R {{ name_version }}'
-    chdir: '{{ stow_dir }}'
-  become: true

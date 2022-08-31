@@ -3,5 +3,11 @@
 
 this_name: fllog
 this_version: 1.2.7
+this_source_uri: 'http://www.w1hkj.com/files/fllog/fllog-{{ this_version }}.tar.gz'
+
 name_version: '{{ this_name }}-{{ this_version }}'
-required_system_packages:
+this_required_system_packages: 
+  - git
+  - build-essential
+this_conflicting_system_packages:
+  - fllog

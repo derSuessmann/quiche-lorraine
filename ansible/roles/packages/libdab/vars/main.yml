@@ -3,9 +3,11 @@
 
 this_name: libdab
 this_version: '2022-06-21'
+this_source_uri: 'https://github.com/JvanKatwijk/dab-cmdline.git'
+
 name_version: '{{ this_name }}-{{ this_version }}'
-commit: 38d51e6
-required_system_packages:
+this_commit: '38d51e6'
+this_required_system_packages:
   - build-essential
   - cmake
   - libsndfile-dev

@@ -3,9 +3,13 @@
 
 this_name: gqrx
 this_version: '2.15.9'
+this_source_uri: 'https://github.com/gqrx-sdr/gqrx.git'
+
 name_version: '{{ this_name }}-{{ this_version }}'
-required_system_packages:
+this_required_system_packages:
   - cmake
   - qtbase5-dev
   - libqt5svg5-dev
   - libpulse-dev
+this_conflicting_system_packages:
+  - gqrx

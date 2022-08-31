@@ -3,7 +3,7 @@
 
 this_name: m17-cxx-demod
 this_version: '2.3'
-this_repository: 'https://github.com/mobilinkd/m17-cxx-demod.git'
+this_source_uri: 'https://github.com/mobilinkd/m17-cxx-demod.git'
 
 name_version: '{{ this_name }}-{{ this_version }}'
 

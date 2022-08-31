@@ -1,20 +1,6 @@
 ---
 # tasks file for openwebrx
 
-- name: Install system packages for {{ name_version }}
-  package:
-    name: '{{ required_system_packages }}'
-    state: latest
-  become: true
-  tags: 'prepare'
-
-- name: Remove conflicting system packages for {{ name_version }}
-  package:
-    name: '{{ this_conflicting_system_packages }}'
-    state: absent
-  become: true
-  tags: 'cleanup'
-
 - name: Create user for {{ name_version }}
   user:
     name: '{{ openwebrx_user }}'
@@ -40,17 +26,16 @@
 - include_role: 
     name: standard_package
   vars:
-    pkg_name: '{{ name_version }}'
+    pkg_basename: '{{ this_name }}'
+    pkg_version: '{{ this_version }}'
     get_method: 'git'
     build_method: 'python_setup'
     required_system_packages: '{{ this_required_system_packages }}'
     conflicting_system_packages: '{{ this_conflicting_system_packages }}'
-    source_uri: '{{ this_repository }}'
+    source_uri: '{{ this_source_uri }}'
     destination: '{{ download_dir }}/{{ name_version }}'
     version: '{{ this_version }}'
     source_path: '{{ download_dir }}/{{ name_version }}'
     build_path: '{{ build_dir }}/{{ name_version }}'
     install_path: '{{ stow_dir }}/{{ name_version }}'
   
-# cd openwebrx
-# ./openwebrx.py

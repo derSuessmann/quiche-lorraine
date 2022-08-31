@@ -9,14 +9,14 @@ This role installs SDRangel.
 
 # Building
 
-The build process is described in the [README][2]. The role installs the required packages.
+The build process is described in the [Wiki][2]. The role installs the required packages.
 
 It follows the standard cmake build process. The role uses this.
 
 # References
 
 - [SDRangel repository][1] (last visited 2022-08-08)
-- [README][2] (last visited 2022-08-08)
+- [Wiki][2] (last visited 2022-08-08)
 
-[1]: https://github.com/dnwrnr/SDRangel
-[2]: https://github.com/dnwrnr/SDRangel/blob/master/README.md
+[1]: https://github.com/f4exb/SDRangel
+[2]: https://github.com/f4exb/sdrangel/wiki/Compile-from-source-in-Linux

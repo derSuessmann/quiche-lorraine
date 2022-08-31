@@ -20,12 +20,12 @@
       dest: '{{ build_dir }}'
     tags: prepare
 
-  - name: Create state directory
+  - name: Create directory for ansible custom facts
     file:
       state: directory
-      mode: 'u=rwx,go=rx'
-      dest: '{{ state_dir }}'
-    tags: prepare
+      recurse: yes
+      path: /etc/ansible/facts.d
+    become: true
 
 - import_playbook: upgrade_system.yml
 - import_playbook: setup.yml

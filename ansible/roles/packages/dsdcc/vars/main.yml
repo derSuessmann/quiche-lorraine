@@ -3,7 +3,7 @@
 
 this_name: dsdcc
 this_version: '2022-06-21'
-this_repository: 'https://github.com/f4exb/dsdcc.git'
+this_source_uri: 'https://github.com/f4exb/dsdcc.git'
 commit: 4e954c27
 
 name_version: '{{ this_name }}-{{ this_version }}'

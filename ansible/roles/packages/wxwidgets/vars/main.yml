@@ -3,10 +3,14 @@
 
 this_name: wxwidgets
 this_version: '3.1.5'
+this_source_uri: 'https://github.com/wxWidgets/wxWidgets'
+
 name_version: '{{ this_name }}-{{ this_version }}'
-required_system_packages:
+this_required_system_packages:
   - build-essential
   - automake
   - libgtk-3-dev
   - freeglut3
   - freeglut3-dev
+this_conflicting_system_packages:
+  - wx-common

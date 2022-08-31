@@ -3,9 +3,9 @@
 
 this_name: libad9361
 this_version: '2022-07-27'
-this_repository: 'https://github.com/analogdevicesinc/libad9361-iio.git'
+this_source_uri: 'https://github.com/analogdevicesinc/libad9361-iio.git'
 
-this_commit: 96230e68
+this_commit: '96230e68'
 
 name_version: '{{ this_name }}-{{ this_version }}'
 

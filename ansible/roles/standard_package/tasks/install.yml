@@ -1,0 +1,53 @@
+---
+# install tasks
+
+- name: Install system packages for {{ pkg_basename }}-{{ pkg_version }}
+  package:
+    name: '{{ required_system_packages }}'
+    state: latest
+  become: true
+  tags: 'prepare'
+
+- include_role: 
+    name: get_source
+  vars:
+    method: '{{ get_method }}'
+    destination: '{{ download_dir }}/{{ pkg_basename }}-{{ pkg_version }}'
+  tags: 'get_source'
+
+- name: Remove conflicting system packages for {{ pkg_basename }}-{{ pkg_version }}
+  package:
+    name: '{{ conflicting_system_packages }}'
+    state: absent
+  become: true
+  tags: 'cleanup'
+
+- include_role: 
+    name: build_install
+  vars:
+    method: '{{ build_method }}'
+
+- name: Unstow old version of {{ pkg_basename }}
+  shell:
+    cmd: 'stow -D {{ stow_options }} {{ pkg_basename }}-{{ ansible_local[pkg_basename]["pkg_version"] }}'
+    chdir: '{{ stow_dir }}'
+  become: true
+  when: ansible_local[pkg_basename] is defined and ansible_local[pkg_basename]['pkg_version'] != pkg_version
+
+- name: Stow {{ pkg_basename }}-{{ pkg_version }}
+  shell:
+    cmd: 'stow -R {{ stow_options }} {{ pkg_basename }}-{{ pkg_version }}'
+    chdir: '{{ stow_dir }}'
+  become: true
+
+- name: Run ldconfig for {{ pkg_basename }}-{{ pkg_version }}
+  command:
+    cmd: 'ldconfig'
+  when: ldconfig
+  become: true
+
+- name: Save installation state of {{ pkg_basename }}-{{ pkg_version }} to /etc/ansible/facts.d
+  template:
+    src: package.fact.j2
+    dest: '/etc/ansible/facts.d/{{ pkg_basename }}.fact'
+  become: true

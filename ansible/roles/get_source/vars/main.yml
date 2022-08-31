@@ -1,7 +1,6 @@
 ---
 # vars file for get_download_unarchive
 
-pkg_name:    # name of the package, this name is only used to show the progress
 source_uri:  # uri of the remote archive
 destination: # path to the source directory
 

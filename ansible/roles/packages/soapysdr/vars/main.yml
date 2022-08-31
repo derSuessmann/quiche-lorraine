@@ -3,10 +3,11 @@
 
 this_name: soapysdr
 this_version: '0.8.1'
-git_commit: '1cf5a539'
+this_source_uri: 'https://github.com/pothosware/SoapySDR.git'
+
 name_version: '{{ this_name }}-{{ this_version }}'
 soapysdr_name_version: '{{ name_version }}'
-required_system_packages:
+this_required_system_packages:
   - build-essential
   - cmake
   - g++
@@ -14,3 +15,5 @@ required_system_packages:
   - python2-dbg
   - python3-numpy
   - swig
+this_conflicting_system_packages:
+  - 'soapy*'

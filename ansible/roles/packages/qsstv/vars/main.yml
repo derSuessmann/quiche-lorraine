@@ -3,8 +3,10 @@
 
 this_name: qsstv
 this_version: 9.5.8
+this_source_uri: 'http://users.telenet.be/on4qz/qsstv/downloads/qsstv_{{ this_version }}.tar.gz'
+
 name_version: '{{ this_name }}-{{ this_version }}'
-required_system_packages:
+this_required_system_packages:
   - g++
   - libfftw3-dev
   - qtbase5-dev

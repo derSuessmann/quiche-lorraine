@@ -3,5 +3,11 @@
 
 this_name: soapyrtlsdr
 this_version: '0.3.3'
+this_source_uri: 'https://github.com/pothosware/SoapyRTLSDR.git'
+
 name_version: '{{ this_name }}-{{ this_version }}'
-required_system_packages:
+this_required_system_packages:
+  - git
+  - build-essential
+this_conflicting_system_packages:
+  - 'soapy*'

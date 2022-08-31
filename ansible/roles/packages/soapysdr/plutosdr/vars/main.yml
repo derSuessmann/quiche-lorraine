@@ -3,6 +3,13 @@
 
 this_name: soapyplutosdr
 this_version: '2022-02-07'
+this_source_uri: 'https://github.com/pothosware/SoapyPlutoSDR.git'
+this_commit: 'a2431282fc2'
+
 name_version: '{{ this_name }}-{{ this_version }}'
 
-required_system_packages:
+this_required_system_packages:
+  - git
+  - build-essential
+this_conflicting_system_packages:
+  - 'soapy*'

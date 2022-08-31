@@ -3,8 +3,8 @@
 
 this_name: sgp4
 this_version: '2021-01-11'
-this_repository: 'https://github.com/dnwrnr/sgp4.git'
-commit: ca9d4d97
+this_source_uri: 'https://github.com/dnwrnr/sgp4.git'
+this_commit: 'ca9d4d97'
 
 name_version: '{{ this_name }}-{{ this_version }}'
 

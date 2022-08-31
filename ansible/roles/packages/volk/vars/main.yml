@@ -3,11 +3,15 @@
 
 this_name: volk
 this_version: '2.5.1'
+this_source_uri: 'https://github.com/gnuradio/volk.git'
+
 name_version: '{{ this_name }}-{{ this_version }}'
-required_system_packages:
+this_required_system_packages:
   - cmake
   - g++
   - python3-mako
   - liborc-0.4-dev
   - graphviz
   - doxygen
+this_conflicting_system_packages:
+  - libvolk*

@@ -3,7 +3,7 @@
 
 this_name: openwebrx
 this_version: '1.2.0'
-this_repository: 'https://github.com/jketterl/openwebrx.git'
+this_source_uri: 'https://github.com/jketterl/openwebrx.git'
 
 name_version: '{{ this_name }}-{{ this_version }}'
 

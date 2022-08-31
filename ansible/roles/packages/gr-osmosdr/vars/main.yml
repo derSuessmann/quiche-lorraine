@@ -3,12 +3,16 @@
 
 this_name: gr-osmosdr
 this_version: '20220610'
+this_source_uri:  'https://gitea.osmocom.org/sdr/gr-osmosdr.git'
+this_commit: '821fdb3822'
+
 name_version: '{{ this_name }}-{{ this_version }}'
-required_system_packages:
+this_required_system_packages:
   - git
   - cmake
   - g++
   - libpython3-dev
   - python3-numpy
   - swig
-
+this_conflicting_system_packages:
+  - gr-osmosdr

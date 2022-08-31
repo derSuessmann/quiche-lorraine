@@ -3,7 +3,7 @@
 
 this_name: libiio
 this_version: '0.24'
-this_repository: 'https://github.com/analogdevicesinc/libiio.git'
+this_source_uri: 'https://github.com/analogdevicesinc/libiio.git'
 
 name_version: '{{ this_name }}-{{ this_version }}'
 

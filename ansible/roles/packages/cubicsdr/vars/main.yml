@@ -3,11 +3,18 @@
 
 this_name: cubicsdr
 this_version: '0.2.7'
+this_source_uri: 'https://github.com/cjcliffe/CubicSDR.git'
+
 name_version: '{{ this_name }}-{{ this_version }}'
-required_system_packages:
+this_required_system_packages:
   - build-essential
   - cmake
   - libpulse-dev
   - libgtk-3-dev
   - freeglut3
   - freeglut3-dev
+this_conflicting_system_packages:
+  - cubicsdr
+
+
+this_cmake_defines: '-DOTHER_LIBS="-latomic" -DUSE_HAMLIB=1'

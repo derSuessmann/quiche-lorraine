@@ -1,0 +1,55 @@
+---
+# tasks file for dream
+
+- name: Install system packages for {{ name_version }}
+  package:
+    name: '{{ required_system_packages }}'
+    state: latest
+  become: true
+  tags: 'prepare'
+
+- name: Checkout subversion directory for {{ name_version }}
+  ansible.builtin.subversion:
+    repo: '{{ this_source_uri }}'
+    dest: '{{ download_dir }}/{{ name_version }}'
+    checkout: yes
+  tags: 'get_source'
+
+- name: Remove conflicting system packages for {{ name_version }}
+  package:
+    name: '{{ this_conflicting_system_packages }}'
+    state: absent
+  become: true
+  tags: 'cleanup'
+
+- include_role: 
+    name: build_install
+  vars:
+    method: 'qmake'
+    pkg_name: '{{ this_name }}'
+    pkg_version: '{{ this_version }}'
+    source_path: '{{ download_dir }}/{{ name_version }}'
+    build_path: '{{ build_dir }}/{{ name_version }}'
+    install_path: '{{ stow_dir }}/{{ name_version }}'
+    qmake_defines: '{{ this_qmake_defines }}'
+    qmake_profile: '{{ this_qmake_profile }}'
+  tags: 'build_install'
+
+- name: Unstow old version of {{ name_version }}
+  shell:
+    cmd: "stow -D {{ stow_options }} {{ this_name }}-{{ ansible_local[this_name]['pkg_version'] }}"
+    chdir: '{{ stow_dir }}'
+  become: true
+  when: ansible_local[this_name] is defined and ansible_local[this_name]['pkg_version'] != this_version
+
+- name: Stow {{ name_version }}
+  command:
+    cmd: 'stow -R {{ name_version }}'
+    chdir: '{{ stow_dir }}'
+  become: true
+
+- name: Save installation state of {{ this_name }}-{{ this_version }} to /etc/ansible/facts.d
+  template:
+    src: package.fact.j2
+    dest: '/etc/ansible/facts.d/{{ this_name }}.fact'
+  become: true

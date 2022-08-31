@@ -3,7 +3,7 @@
 
 this_name: serialdv
 this_version: '1.1.4'
-this_repository: 'https://github.com/f4exb/serialDV.git'
+this_source_uri: 'https://github.com/f4exb/serialDV.git'
 
 name_version: '{{ this_name }}-{{ this_version }}'
 required_system_packages:

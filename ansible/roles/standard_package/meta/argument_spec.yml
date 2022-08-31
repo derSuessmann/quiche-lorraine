@@ -18,8 +18,13 @@ argument_specs:
         choices: ['cmake', 'qmake', 'configure']
         required: true
 
-      pkg_name:
-        description: 'Name of the package. It is only used for displaying progress.'
+      pkg_basename:
+        description: 'Name of the package without any version. Should be the same as the package roles name.'
+        type: 'str'
+        required: true
+
+      pkg_version:
+        description: 'Only the version of the package.'
         type: 'str'
         required: true
 

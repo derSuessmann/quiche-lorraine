@@ -3,7 +3,9 @@
 
 this_name: liquid-dsp
 this_version: '1.4.0'
+this_source_uri: 'https://github.com/jgaeddert/liquid-dsp'
+
 name_version: '{{ this_name }}-{{ this_version }}'
-required_system_packages:
+this_required_system_packages:
   - build-essential
   - automake

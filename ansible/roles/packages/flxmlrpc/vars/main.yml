@@ -3,6 +3,10 @@
 
 this_name: flxmlrpc
 this_version: 0.1.4
+this_source_uri: 'http://www.w1hkj.com/files/flxmlrpc/flxmlrpc-{{ this_version }}.tar.gz'
+
 name_version: '{{ this_name }}-{{ this_version }}'
-required_system_packages:
-#  - g++
+this_required_system_packages:
+  - g++
+this_conflicting_system_packages:
+  - flxmlrpc-dev

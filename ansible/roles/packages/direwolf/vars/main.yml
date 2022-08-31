@@ -3,7 +3,7 @@
 
 this_name: direwolf
 this_version: '1.6'
-this_repository: 'https://github.com/wb2osz/direwolf.git'
+this_source_uri: 'https://github.com/wb2osz/direwolf.git'
 
 name_version: '{{ this_name }}-{{ this_version }}'
 

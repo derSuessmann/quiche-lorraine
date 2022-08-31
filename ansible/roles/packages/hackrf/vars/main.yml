@@ -3,7 +3,7 @@
 
 this_name: hackrf
 this_version: '2021.03.1'
-this_repository: 'https://github.com/mossmann/hackrf.git'
+this_source_uri: 'https://github.com/mossmann/hackrf.git'
 
 name_version: '{{ this_name }}-{{ this_version }}'
 

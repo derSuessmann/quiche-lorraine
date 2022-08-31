@@ -1,45 +1,8 @@
 ---
 # tasks file for standard_package
 
-- name: Install system packages for {{ pkg_name }}
-  package:
-    name: '{{ required_system_packages }}'
-    state: latest
-  become: true
-  tags: 'prepare'
-
-- include_role: 
-    name: get_source
-  vars:
-    method: '{{ get_method }}'
-    destination: '{{ download_dir }}/{{ pkg_name }}'
-  tags: 'get_source'
-
-- name: Remove conflicting system packages for {{ pkg_name }}
-  package:
-    name: '{{ conflicting_system_packages }}'
-    state: absent
-  become: true
-  tags: 'cleanup'
-
-- include_role: 
-    name: build_install
-  vars:
-    method: '{{ build_method }}'
-
-- name: Stow {{ pkg_name }}
-  shell:
-    cmd: 'stow -R {{ stow_options }} {{ pkg_name }}'
-    chdir: '{{ stow_dir }}'
-  become: true
-
-- name: Run ldconfig for {{ pkg_name }}
-  command:
-    cmd: 'ldconfig'
-  when: ldconfig
-  become: true
-
-
-
+- name: Install {{ pkg_basename }}-{{ pkg_version }}
+  include_tasks: install.yml
+  when: ansible_local[pkg_basename] is not defined or ansible_local[pkg_basename]['pkg_version'] != pkg_version
 
 

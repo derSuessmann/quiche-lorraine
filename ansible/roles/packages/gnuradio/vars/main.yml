@@ -3,8 +3,10 @@
 
 this_name: gnuradio
 this_version: '3.10.3.0'
+this_source_uri: 'https://github.com/gnuradio/gnuradio.git'
+
 name_version: '{{ this_name }}-{{ this_version }}'
-required_system_packages:
+this_ required_system_packages:
   - git
   - cmake
   - g++
@@ -44,3 +46,5 @@ required_system_packages:
   - libspdlog-dev
   - libportaudio2
   - libjack-dev
+this_conflicting_system_packages:
+  - gnuradio*

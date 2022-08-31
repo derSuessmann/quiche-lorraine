@@ -1,44 +1,20 @@
 ---
 # tasks file for wfview
 
-- name: Install system packages for {{ name_version }}
-  package:
-    name: '{{ required_system_packages }}'
-    state: latest
-  become: true
-  tags: 'prepare'
-
 - include_role: 
-    name: get_source
+    name: standard_package
   vars:
-    method: 'git'
-    pkg_name: '{{ name_version }}'
-    source_uri: 'https://gitlab.com/eliggett/wfview.git'
+    pkg_basename: '{{ this_name }}'
+    pkg_version: '{{ this_version }}'
+    get_method: 'git'
+    build_method: 'qmake'
+    required_system_packages: '{{ this_required_system_packages }}'
+    conflicting_system_packages: '{{ this_conflicting_system_packages }}'
+    source_uri: '{{ this_source_uri }}'
     destination: '{{ download_dir }}/{{ name_version }}'
     version: '{{ this_version }}'
-  tags: 'get_source'
-
-- name: Remove conflicting system packages for {{ name_version }}
-  package:
-    name:
-    state: absent
-  become: true
-  tags: 'cleanup'
-
-- include_role: 
-    name: build_install
-  vars:
-    method: 'qmake'
-    pkg_name: '{{ name_version }}'
     source_path: '{{ download_dir }}/{{ name_version }}'
     build_path: '{{ build_dir }}/{{ name_version }}'
     install_path: '{{ stow_dir }}/{{ name_version }}'
     qmake_profile: 'wfview.pro'
     qmake_defines: 'PREFIX={{ stow_dir }}/{{ name_version }}'
-  tags: 'build_install'
-
-- name: Stow {{ name_version }}
-  command:
-    cmd: 'stow -R {{ name_version }}'
-    chdir: '{{ stow_dir }}'
-  become: true

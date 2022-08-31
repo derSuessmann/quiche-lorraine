@@ -18,5 +18,5 @@ It follows the standard cmake build process. The role uses this.
 - [DSDcc repository][1] (last visited 2022-08-08)
 - [README][2] (last visited 2022-08-08)
 
-[1]: https://github.com/f4exb/DSDcc
-[2]: https://github.com/f4exb/DSDcc/blob/master/README.md
+[1]: https://github.com/f4exb/dsdcc
+[2]: https://github.com/f4exb/dsdcc/blob/master/Readme.md

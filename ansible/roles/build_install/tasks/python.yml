@@ -1,20 +1,20 @@
 ---
 # tasks file for build_install_python
 
-- name: Create install directory for {{ pkg_name }}
+- name: Create install directory for {{ pkg_basename }}-{{ pkg_version }}
   file:
     state: directory
     mode: 'u=rwx,go=rx'
     dest: '{{ install_path }}'
   become: true
 
-- name: Build {{ pkg_name }}
+- name: Build {{ pkg_basename }}-{{ pkg_version }}
   command:
     cmd: 'python {{ source_path }}/setup.py build -j {{ make_jobs_number }}'
     chdir: '{{ source_path }}'
 
-- name: Install {{ pkg_name }}
+- name: Install {{ pkg_basename }}-{{ pkg_version }}
   command:
-    cmd: 'python {{ source_path }}/setup.py install --prefix {{ install_path }} --install-headers {{ install_path }}/include --single-version-externally-managed --record installed.lst'
+    cmd: 'python {{ source_path }}/setup.py install --prefix {{ install_path }} {{ install_options | default("") }}'
     chdir: '{{ source_path }}'
   become: true

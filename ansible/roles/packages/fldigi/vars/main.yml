@@ -3,8 +3,10 @@
 
 this_name: fldigi
 this_version: 4.1.23
+this_source_uri: 'http://www.w1hkj.com/files/fldigi/fldigi-{{ this_version }}.tar.gz'
+
 name_version: '{{ this_name }}-{{ this_version }}'
-required_system_packages:
+this_required_system_packages:
   - build-essential
   - gettext
   - libfltk1.3-dev
@@ -18,3 +20,5 @@ required_system_packages:
   - libudev-dev
   - libpulse-dev
   - pavucontrol
+this_conflicting_system_packages:
+  - fldigi

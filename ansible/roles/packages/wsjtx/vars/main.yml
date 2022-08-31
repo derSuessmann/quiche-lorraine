@@ -3,8 +3,10 @@
 
 this_name: wsjtx
 this_version: 2.5.4
+this_source_uri: 'https://physics.princeton.edu/pulsar/k1jt/wsjtx-{{ this_version }}.tgz'
+    
 name_version: '{{ this_name }}-{{ this_version }}'
-required_system_packages:
+this_required_system_packages:
   - build-essential
   - gcc
   - g++
@@ -25,3 +27,5 @@ required_system_packages:
   - libusb-1.0-0-dev
   - libudev-dev
   - libnova-dev
+this_conflicting_system_packages:
+  - wsjtx

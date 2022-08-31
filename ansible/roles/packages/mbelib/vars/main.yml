@@ -3,8 +3,10 @@
 
 this_name: mbelib
 this_version: '2019-05-29'
+this_source_uri: 'https://github.com/szechyjs/mbelib.git'
+
 name_version: '{{ this_name }}-{{ this_version }}'
-commit: 9a04ed5
+this_commit: '9a04ed5'
 required_system_packages:
   - build-essential
   - cmake

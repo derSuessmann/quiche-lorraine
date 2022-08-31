@@ -3,7 +3,7 @@
 
 this_name: codec2
 this_version: '1.0.5'
-this_repository: 'https://github.com/drowe67/codec2.git'
+this_source_uri: 'https://github.com/drowe67/codec2.git'
 
 name_version: '{{ this_name }}-{{ this_version }}'
 

@@ -1,0 +1,69 @@
+---
+# tasks file for kappanhang
+
+- name: Install system packages for {{ name_version }}
+  package:
+    name: '{{ required_system_packages }}'
+    state: latest
+  become: true
+  tags: 'prepare'
+
+- name: Remove conflicting system packages for {{ name_version }}
+  package:
+    name:
+      - golang
+    state: absent
+  become: true
+  tags: 'cleanup'
+
+- name: Go install '{{ name_version }}'
+  environment:
+    PATH: '{{ install_dir }}/go/bin:{{ ansible_env.PATH }}'
+    GOPATH: '{{ build_dir }}/go'
+  command: 
+    cmd: 'go install github.com/nonoo/{{ this_name }}@66f2369ef'
+    creates: '{{ build_dir }}/go/bin/{{ this_name }}'
+  when: git_commit is defined
+
+- name: Create install directory for {{ name_version }}
+  file:
+    state: directory
+    mode: 'u=rwx,go=rx'
+    dest: '{{ stow_dir }}/{{ name_version }}/{{ directory }}'
+  loop: ['bin', 'share/applications']
+  loop_control:
+    loop_var: directory
+  become: true
+
+- name: Copy binary {{ name_version }}
+  copy:
+    src: '{{ build_dir }}/go/bin/kappanhang'
+    dest: '{{ stow_dir }}/{{ name_version }}/bin/'
+    mode: 'preserve'
+    remote_src: yes
+  become: true
+
+- name: Create .desktop file for {{ name_version }}
+  template:
+    src: desktop.j2
+    dest: '{{ stow_dir }}/{{ name_version }}/share/applications/kappanhang.desktop'
+  become: true
+
+- name: Unstow old version of {{ name_version }}
+  shell:
+    cmd: "stow -D {{ stow_options }} {{ this_name }}-{{ ansible_local[this_name]['pkg_version'] }}"
+    chdir: '{{ stow_dir }}'
+  become: true
+  when: ansible_local[this_name] is defined and ansible_local[this_name]['pkg_version'] != this_version
+
+- name: Stow {{ name_version }}
+  command:
+    cmd: 'stow -R {{ name_version }}'
+    chdir: '{{ stow_dir }}'
+  become: true
+
+- name: Save installation state of {{ this_name }}-{{ this_version }} to /etc/ansible/facts.d
+  template:
+    src: package.fact.j2
+    dest: '/etc/ansible/facts.d/{{ this_name }}.fact'
+  become: true

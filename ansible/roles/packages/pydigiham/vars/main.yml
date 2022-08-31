@@ -3,7 +3,7 @@
 
 this_name: pydigiham
 this_version: '0.6.0'
-this_repository: 'https://github.com/jketterl/pydigiham.git'
+this_source_uri: 'https://github.com/jketterl/pydigiham.git'
 
 name_version: '{{ this_name }}-{{ this_version }}'
 

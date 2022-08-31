@@ -3,7 +3,7 @@
 
 this_name: sdrangel
 this_version: '7.6.1'
-this_repository: 'https://github.com/f4exb/sdrangel.git'
+this_source_uri: 'https://github.com/f4exb/sdrangel.git'
 
 name_version: '{{ this_name }}-{{ this_version }}'
 

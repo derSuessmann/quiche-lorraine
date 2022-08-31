@@ -3,8 +3,10 @@
 
 this_name: wfview
 this_version: '1.2e'
+this_source_uri: 'https://gitlab.com/eliggett/wfview.git'
+
 name_version: '{{ this_name }}-{{ this_version }}'
-required_system_packages:
+this_required_system_packages:
   - build-essential
   - qt5-qmake
   - qtbase5-dev

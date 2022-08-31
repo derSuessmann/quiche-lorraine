@@ -3,7 +3,7 @@
 
 this_name: js8call
 this_version: '2.2.0-ga'
-this_repository: 'https://bitbucket.org/widefido/js8call.git'
+this_source_uri: 'https://bitbucket.org/widefido/js8call.git'
 
 name_version: '{{ this_name }}-{{ this_version }}'
 

@@ -3,8 +3,8 @@
 
 this_name: libsigmf
 this_version: '2020-04-12'
-this_repository: 'https://github.com/f4exb/libsigmf.git'
-commit: 8ac7dbcb
+this_source_uri: 'https://github.com/f4exb/libsigmf.git'
+commit: '8ac7dbcb'
 
 name_version: '{{ this_name }}-{{ this_version }}'
 

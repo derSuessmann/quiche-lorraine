@@ -1,24 +1,34 @@
-# GNURadio
+# GNURadio OsmoSDR
 
-This role installs GNURadio.
+This role installs gr-osmosdr.
 
-> GNU Radio is a free & open-source software development toolkit that provides signal processing blocks to implement software radios. It can be used with readily-available low-cost external RF hardware to create software-defined radios, or without hardware in a simulation-like environment. It is widely used in research, industry, academia, government, and hobbyist environments to support both wireless communications research and real-world radio systems.
-> -- <cite>[GNURadio project site][1]</cite>
+> While primarily being developed for the OsmoSDR hardware, this block as well supports:
+>
+> - FUNcube Dongle / Pro+ through gr-funcube
+> - RTL2832U based DVB-T dongles through librtlsdr
+> - RTL-TCP spectrum server (see librtlsdr project)
+> - SDRplay RSP through SDRplay API library
+> - gnuradio .cfile input through libgnuradio-blocks
+> - RFSPACE SDR-IQ, SDR-IP, NetSDR (incl. X2 option)
+> - AirSpy Wideband Receiver through libairspy
+> - CCCamp 2015 rad1o Badge through libhackrf
+> - Great Scott Gadgets HackRF through libhackrf
+> - Nuand LLC bladeRF through libbladeRF library
+> - Ettus USRP Devices through Ettus UHD library
+> - Fairwaves UmTRX through Fairwaves' module for UHD
+> - Fairwaves XTRX through libxtrx
+> - Red Pitaya SDR transceiver (http://bazaar.redpitaya.com)
+> - FreeSRP through libfreesrp
+> -- <cite>[README][1]</cite>
 
 <!--more-->
 
-Raspberry Pi OS provides a version of GNURadio in the gnuradio package and could be installed with the package manager, but we want a more up-to-date version.
-
 # Building
 
-The building process is described in the [wiki article][3] on the project's web site. It follows the standard cmake build process. The role uses this.
+The building process is described in the [README][1] on the project's web site. It follows the standard cmake build process. The role uses this.
 
 # References
 
-- [GNURadio project site][1] (last visited 2021-10-14)
-- [GNURadio repository][2] (last visited 2021-10-14)
-- [GNURadio wiki article][3] (last visited 2021-10-14)
+- [README][1] (last visited 2021-10-14)
 
-[1]: https://www.gnuradio.org/
-[2]: https://github.com/gqrx-sdr/gqrx.git
-[3]: https://wiki.gnuradio.org/index.php/InstallingGRFromSource_on_Raspberry_Pi
+[1]: https://gitea.osmocom.org/sdr/gr-osmosdr/src/branch/master/README

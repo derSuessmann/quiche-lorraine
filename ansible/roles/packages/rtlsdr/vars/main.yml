@@ -4,7 +4,7 @@
 this_name: rtlsdr
 this_version: '2022-01-19'
 this_commit: '5e73f90f1'
-this_repository: 'https://github.com/osmocom/rtl-sdr.git'
+this_source_uri: 'https://github.com/osmocom/rtl-sdr.git'
 
 name_version: '{{ this_name }}-{{ this_version }}'
 

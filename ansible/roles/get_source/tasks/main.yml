@@ -1,7 +1,7 @@
 ---
 # tasks file for get_source
 
-- name: Git clone '{{ pkg_name }}'
+- name: Git clone {{ pkg_basename }}-{{ pkg_version }}
   git:
     repo: '{{ source_uri }}'
     dest: '{{ destination }}'
@@ -10,7 +10,7 @@
   when: method == 'git'
 
 - block:
-  - name: Download archives {{ pkg_name }}
+  - name: Download archives {{ pkg_basename }}-{{ pkg_version }}
     get_url:
       url: '{{ source_uri }}'
       dest: '{{ download_dir }}/{{ source_uri | basename }}'
@@ -19,7 +19,7 @@
       validate_certs: yes
       mode: 'u=rw,go=r'
 
-  - name: Unarchive {{ pkg_name }}
+  - name: Unarchive {{ pkg_basename }}-{{ pkg_version }}
     unarchive:
       src: '{{ download_dir }}/{{ source_uri | basename }}'
       remote_src: yes

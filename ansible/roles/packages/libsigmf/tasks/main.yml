@@ -4,12 +4,13 @@
 - include_role: 
     name: standard_package
   vars:
-    pkg_name: '{{ name_version }}'
+    pkg_basename: '{{ this_name }}'
+    pkg_version: '{{ this_version }}'
     get_method: 'git'
     build_method: 'cmake'
     required_system_packages: '{{ this_required_system_packages }}'
     conflicting_system_packages: '{{ this_conflicting_system_packages }}'
-    source_uri: '{{ this_repository }}'
+    source_uri: '{{ this_source_uri }}'
     destination: '{{ download_dir }}/{{ name_version }}'
     version: '{{ commit }}'
     source_path: '{{ download_dir }}/{{ name_version }}'
