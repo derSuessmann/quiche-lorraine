@@ -14,5 +14,7 @@ this_required_system_packages:
   - libpython3-dev
   - python3-numpy
   - swig
+  - libspdlog-dev
+  - libgmp-dev
 this_conflicting_system_packages:
   - gr-osmosdr

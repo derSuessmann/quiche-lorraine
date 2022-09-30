@@ -16,5 +16,5 @@
     source_path: '{{ download_dir }}/{{ name_version }}'
     build_path: '{{ build_dir }}/{{ name_version }}'
     install_path: '{{ stow_dir }}/{{ name_version }}'
-    stow_options: "--override='share.*gnuradio-grc.*' --ignore='share.*mimeinfo.cache'"
+    stow_options: "--override='share.*gnuradio-grc.*' --ignore='share/applications/gnuradio-grc.desktop' --ignore='share.*mimeinfo.cache'"
 
