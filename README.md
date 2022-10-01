@@ -24,7 +24,7 @@ No. I found that most of the playbooks were not idem potent. A re-run of the pla
 
 ## Why not bother?
 
-There are already some very usable projects available (see above), which may suit your needs perfectly. I will only write playbooks for things I am interested in at the moment and may even not maintain an old playbook anymore in the future. Deep in my heart I know, we are all doing it wrong! We should all help maintaining the Debian packages or create new ones and contribute to [Debian HAMs](https://wiki.debian.org/DebianHams/) or at least create Debian packages.
+There are already some very usable projects available (see above), which may suit your needs perfectly. I will only write playbooks for things I am interested in at the moment and may even not maintain an old playbook anymore in the future. Deep in my heart I know, we are all doing it wrong! We should all help to maintain the Debian packages or create new ones and contribute to [Debian HAMs](https://wiki.debian.org/DebianHams/) or at least create Debian packages.
 
 But! What if you prefer another distribution or even another OS like one of the BSDs. Perhaps we should concentrate on the old Unix/Linux/BSD standards...
 
@@ -83,6 +83,6 @@ I have bought a high resolution 10" touch display. The default LXDE based deskto
 
 # Status of the project
 
-The project is far from being stable! The structure is quite brittle. The main reason is the dependancies between the different software projects. In the end it is some sort of mini distribution on top of an existing distribution.
+The project is far from being stable! The structure is quite brittle. The main reason is the dependencies between the different software projects. In the end it is some sort of mini distribution on top of an existing distribution.
 
 The `bake.yml` playbook currently runs without an error on my Pi. The software it installs seems to work.
