@@ -7,7 +7,7 @@ category_ham: 'HamRadio'
 project_dir: '{{ ansible_user_dir }}/.quiche-lorraine'
 
 # Directory to download the archives to
-download_dir: '{{ project_dir }}/Downloads'
+download_dir: '{{ project_dir }}/downloads'
 
 # Directory to unarchive source archives to
 build_dir: '{{ project_dir }}/build'
