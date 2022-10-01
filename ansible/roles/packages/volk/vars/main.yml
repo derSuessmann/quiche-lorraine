@@ -13,5 +13,6 @@ this_required_system_packages:
   - liborc-0.4-dev
   - graphviz
   - doxygen
+  - libcpu-features-dev
 this_conflicting_system_packages:
   - libvolk*

@@ -13,7 +13,7 @@ This role installs VOLK.
 
 # Building
 
-The building process is described in the [Readme][1] in the project's git repository.
+The building process is described in the [Readme][1] in the project's git repository. The build process can not link `libcpu-features.a` when building for the stow directory. The default path `/usr/local` does work, but I do not want volk installed there. As a workaroud the package installs the `libcpu-features-dev` system package.
 
 # Status
 
