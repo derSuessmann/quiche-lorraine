@@ -14,7 +14,7 @@
     destination: '{{ download_dir }}/{{ name_version }}'
     version: 'v{{ this_version }}'
     source_path: '{{ download_dir }}/{{ name_version }}'
-    build_path: '{{ build_dir }}/{{ name_version }}'
+    build_path: '{{ download_dir }}/{{ name_version }}'      # build in separate directory failed.
     install_path: '{{ stow_dir }}/{{ name_version }}'
     bootstrap_command: './bootstrap.sh'
     bootstrapped: '{{ download_dir }}/{{ name_version }}/configure'
