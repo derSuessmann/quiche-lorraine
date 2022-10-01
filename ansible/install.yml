@@ -12,6 +12,9 @@
       become: yes
       tags: prepare
 
+    - role: packages/openwebrx
+      tags: openwebrx
+      
     - role: packages/sdrangel
       tags: sdrangel
 
