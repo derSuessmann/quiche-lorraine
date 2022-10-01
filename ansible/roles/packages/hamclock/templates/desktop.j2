@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=HamClock
-Comment='{{ target }}'
-Exec='{{ target }}'
+Name=HamClock{{ " big" if (target == "hamclock-1600x960" or target == "hamclock-big") else " large" if target == "hamclock-2400x1440" else " huge" if target == "hamclock-3200x1920" else "" }}
+Comment={{ target }}
+Exec={{ target }}
 Icon=hamclock.png
 Terminal=false
 Type=Application
