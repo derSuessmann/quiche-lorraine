@@ -3,6 +3,8 @@
 
 this_name: kappanhang
 this_version: '20210526'
+this_commit: '66f2369ef'
+
 name_version: '{{ this_name }}-{{ this_version }}'
 required_system_packages:
   - golang

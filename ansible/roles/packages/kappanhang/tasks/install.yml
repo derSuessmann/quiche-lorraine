@@ -21,9 +21,9 @@
     PATH: '{{ install_dir }}/go/bin:{{ ansible_env.PATH }}'
     GOPATH: '{{ build_dir }}/go'
   command: 
-    cmd: 'go install github.com/nonoo/{{ this_name }}@66f2369ef'
+    cmd: 'go install github.com/nonoo/{{ this_name }}@{{ this_commit }}'
     creates: '{{ build_dir }}/go/bin/{{ this_name }}'
-  when: git_commit is defined
+  when: this_commit is defined
 
 - name: Create install directory for {{ name_version }}
   file:
